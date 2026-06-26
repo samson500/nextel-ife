@@ -211,6 +211,45 @@ tr:hover td{background:rgba(255,255,255,0.02);}
       </div>
     </div>
 
+    <!-- BANK DETAILS -->
+    <div class="section">
+      <div class="section-title">Bank Payment Details</div>
+
+      <div class="link-row">
+        <span class="link-label">BANK NAME</span>
+        <div class="link-current" id="currentBankNameDisplay">Loading...</div>
+        <div class="link-input-row">
+          <input class="link-input" type="text" id="bankNameInput" placeholder="e.g. Kuda MFB">
+          <button class="save-btn" id="saveBankNameBtn">Save</button>
+        </div>
+        <div class="link-status" id="bankNameStatus"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="link-row">
+        <span class="link-label">ACCOUNT NAME</span>
+        <div class="link-current" id="currentAccNameDisplay">Loading...</div>
+        <div class="link-input-row">
+          <input class="link-input" type="text" id="accNameInput" placeholder="e.g. NEXTEL CONNECT LTD">
+          <button class="save-btn" id="saveAccNameBtn">Save</button>
+        </div>
+        <div class="link-status" id="accNameStatus"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="link-row">
+        <span class="link-label">ACCOUNT NUMBER</span>
+        <div class="link-current" id="currentAccNumDisplay">Loading...</div>
+        <div class="link-input-row">
+          <input class="link-input" type="text" id="accNumInput" placeholder="10-digit account number">
+          <button class="save-btn" id="saveAccNumBtn">Save</button>
+        </div>
+        <div class="link-status" id="accNumStatus"></div>
+      </div>
+    </div>
+
   </div><!-- /admin-body -->
 </div><!-- /adminShell -->
 
@@ -285,16 +324,25 @@ async function loadConfig() {
     const snap = await getDoc(CONFIG_DOC);
     const data = snap.exists() ? snap.data() : {};
 
-    const wa = data.whatsappLink || "";
-    const tg = data.telegramLink || "";
+    const wa = data.whatsappLink  || "";
+    const tg = data.telegramLink  || "";
+    const bn = data.bankName      || "";
+    const an = data.accountName   || "";
+    const nu = data.accountNumber || "";
 
-    document.getElementById("currentWADisplay").textContent = wa || "Not set";
-    document.getElementById("waLinkInput").value = wa;
-    document.getElementById("currentTGDisplay").textContent = tg || "Not set";
-    document.getElementById("tgLinkInput").value = tg;
+    document.getElementById("currentWADisplay").textContent       = wa || "Not set";
+    document.getElementById("waLinkInput").value                  = wa;
+    document.getElementById("currentTGDisplay").textContent       = tg || "Not set";
+    document.getElementById("tgLinkInput").value                  = tg;
+    document.getElementById("currentBankNameDisplay").textContent = bn || "Not set";
+    document.getElementById("bankNameInput").value                = bn;
+    document.getElementById("currentAccNameDisplay").textContent  = an || "Not set";
+    document.getElementById("accNameInput").value                 = an;
+    document.getElementById("currentAccNumDisplay").textContent   = nu || "Not set";
+    document.getElementById("accNumInput").value                  = nu;
   } catch (err) {
-    document.getElementById("currentWADisplay").textContent = "Error loading";
-    document.getElementById("currentTGDisplay").textContent = "Error loading";
+    ["currentWADisplay","currentTGDisplay","currentBankNameDisplay","currentAccNameDisplay","currentAccNumDisplay"]
+      .forEach(id => document.getElementById(id).textContent = "Error loading");
   }
 }
 
@@ -349,6 +397,33 @@ document.getElementById("saveTGBtn").addEventListener("click", async () => {
     btn.disabled = false; btn.textContent = "Save";
   }
 });
+
+/* ── Generic text field saver ── */
+function makeSaveHandler(btnId, inputId, statusId, field, displayId, label) {
+  document.getElementById(btnId).addEventListener("click", async () => {
+    const btn    = document.getElementById(btnId);
+    const status = document.getElementById(statusId);
+    const val    = document.getElementById(inputId).value.trim();
+    if (!val) { status.textContent = "Field cannot be empty."; status.className = "link-status error"; return; }
+    btn.disabled = true; btn.textContent = "Saving…"; status.textContent = "";
+    try {
+      await setDoc(CONFIG_DOC, { [field]: val }, { merge: true });
+      document.getElementById(displayId).textContent = val;
+      status.textContent = "✓ " + label + " saved.";
+      status.className   = "link-status";
+      toast(label + " updated!");
+    } catch (err) {
+      status.textContent = "Save failed — check Firestore rules.";
+      status.className   = "link-status error";
+    } finally {
+      btn.disabled = false; btn.textContent = "Save";
+    }
+  });
+}
+
+makeSaveHandler("saveBankNameBtn", "bankNameInput",  "bankNameStatus", "bankName",      "currentBankNameDisplay", "Bank name");
+makeSaveHandler("saveAccNameBtn",  "accNameInput",   "accNameStatus",  "accountName",   "currentAccNameDisplay",  "Account name");
+makeSaveHandler("saveAccNumBtn",   "accNumInput",    "accNumStatus",   "accountNumber", "currentAccNumDisplay",   "Account number");
 
 function esc(str) {
   return String(str)
