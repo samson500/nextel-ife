@@ -425,13 +425,13 @@ body{
     <!-- BANK NAME -->
     <div class="detail-card">
       <div class="detail-label">Bank Name</div>
-      <div class="detail-value">Kuda MFB</div>
+      <div class="detail-value" id="bankNameVal">Kuda MFB</div>
     </div>
 
     <!-- ACCOUNT NAME -->
     <div class="detail-card">
       <div class="detail-label">Account Name</div>
-      <div class="detail-value">IFEOLUWA DIGITAL INNOVATIONS- NEXTEL</div>
+      <div class="detail-value" id="accountNameVal">IFEOLUWA DIGITAL INNOVATIONS- NEXTEL</div>
     </div>
 
     <!-- ACCOUNT NUMBER -->
@@ -543,11 +543,11 @@ function copyAccount(){
   });
 }
 
-/* ---- CONTACT LINKS FROM FIRESTORE ---- */
+/* ---- FIRESTORE CONFIG ---- */
 let _waLink = "";
 let _tgLink = "";
 
-async function loadContactLinks(){
+async function loadFirestoreConfig(){
   try {
     const { initializeApp }  = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
     const { getFirestore, doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
@@ -562,13 +562,17 @@ async function loadContactLinks(){
     const db   = getFirestore(app, "(default)");
     const snap = await getDoc(doc(db, "account", "nextelife"));
     if(snap.exists()){
-      _waLink = snap.data().whatsappLink || "";
-      _tgLink = snap.data().telegramLink || "";
+      const d = snap.data();
+      _waLink = d.whatsappLink || "";
+      _tgLink = d.telegramLink || "";
+      if(d.bankName)      document.getElementById("bankNameVal").textContent    = d.bankName;
+      if(d.accountName)   document.getElementById("accountNameVal").textContent  = d.accountName;
+      if(d.accountNumber) document.getElementById("accountNum").textContent      = d.accountNumber;
     }
-  } catch(e){ console.warn("Could not load contact links", e); }
+  } catch(e){ console.warn("Could not load config", e); }
 }
 
-loadContactLinks();
+loadFirestoreConfig();
 
 function contactWhatsApp(){
   const user   = JSON.parse(localStorage.getItem("nextelUser") || "{}");
