@@ -1,0 +1,898 @@
+<!DOCTYPE HTML><html lang="en">
+<head>
+<title>Nextel Connect - Dashboard</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="light only" />
+<meta name="description" content="Nextel Connect - Your Telecom Earning Dashboard" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+html,body,div,span,h1,h2,h3,h4,h5,h6,p,a,img,ul,ol,li,form,label,table,tbody,thead,tr,th,td,article,aside,footer,header,nav,section{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+*,*::before,*::after{box-sizing:border-box;}
+body{line-height:1;-webkit-text-size-adjust:none;min-height:100vh;min-width:320px;overflow-x:hidden;word-wrap:break-word;background:#071a0f;}
+ol,ul{list-style:none;}
+input::-moz-focus-inner{border:0;padding:0}
+input[type="text"],input[type="email"],input[type="password"],input[type="tel"],select,textarea{-moz-appearance:none;-webkit-appearance:none;appearance:none}
+a{color:inherit;text-decoration:none;}
+
+:root{
+  --bg:#071a0f;
+  --card:#0a1e0d;
+  --card2:#0d2414;
+  --green:#1a7a4a;
+  --green-light:#25a060;
+  --gold:#C9A84C;
+  --gold2:#D4A843;
+  --muted:rgba(255,255,255,0.55);
+  --border:rgba(201,168,76,0.15);
+  --border2:rgba(255,255,255,0.05);
+}
+
+/* ========================= SIGN-UP FORM ========================= */
+#nextelForm{
+  display:block;
+  background:#071a0f;
+  color:white;
+  font-family:'Poppins',sans-serif;
+  min-height:100vh;
+  padding:24px 18px;
+  text-align:left;
+}
+
+/* VOICE NOTE BOX */
+.vn-box{
+  background:linear-gradient(135deg,#1a7a4a,#0d4a2a);
+  border-radius:26px;padding:16px 18px;
+  margin-bottom:20px;color:#fff;
+  display:flex;flex-direction:column;gap:8px;
+  border:1px solid rgba(201,168,76,0.25);
+}
+.vn-top{display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.vn-title{font-size:18px;font-weight:700;}
+.vn-btn{
+  width:65px;height:65px;border-radius:50%;border:none;
+  background:#071a0f;display:flex;align-items:center;
+  justify-content:center;cursor:pointer;padding:0;flex-shrink:0;
+}
+.vn-btn svg{width:24px;height:24px;fill:var(--gold);}
+.vn-progress{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;}
+.vn-wave{flex:1;height:30px;display:flex;align-items:center;gap:4px;}
+.vn-wave div{width:6px;background:rgba(255,255,255,0.7);border-radius:20px;animation:nextelWave 1s infinite ease-in-out;}
+.vn-wave div:nth-child(1){height:10px;animation-delay:.1s;}
+.vn-wave div:nth-child(2){height:24px;animation-delay:.2s;}
+.vn-wave div:nth-child(3){height:38px;animation-delay:.3s;}
+.vn-wave div:nth-child(4){height:26px;animation-delay:.4s;}
+.vn-wave div:nth-child(5){height:18px;animation-delay:.5s;}
+.vn-wave div:nth-child(6){height:30px;animation-delay:.6s;}
+.vn-wave div:nth-child(7){height:22px;animation-delay:.7s;}
+.vn-wave div:nth-child(8){height:14px;animation-delay:.8s;}
+.vn-wave div:nth-child(9){height:28px;animation-delay:.9s;}
+.vn-wave div:nth-child(10){height:16px;animation-delay:1s;}
+.vn-wave div:nth-child(11){height:36px;animation-delay:1.1s;}
+.vn-wave div:nth-child(12){height:20px;animation-delay:1.2s;}
+@keyframes nextelWave{
+  0%,100%{transform:scaleY(1);opacity:0.6;}
+  50%{transform:scaleY(1.35);opacity:1;}
+}
+.vn-text{font-size:14px;font-weight:500;line-height:1.5;color:rgba(255,255,255,0.85);}
+
+/* FORM FIELDS */
+.form-logo{width:40px;height:40px;margin-bottom:20px;display:block;border-radius:8px;}
+.form-title{font-size:28px;font-weight:700;margin-bottom:6px;color:#fff;}
+.form-sub{color:var(--muted);font-size:14px;margin-bottom:28px;}
+.form-label{font-size:12px;letter-spacing:1px;margin-bottom:8px;margin-top:18px;color:var(--muted);display:block;}
+.input-wrap{
+  display:flex;align-items:center;gap:10px;
+  background:#0a1e0d;
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:20px;padding:14px 16px;
+}
+.input-wrap svg{width:18px;height:18px;fill:var(--gold);opacity:0.9;flex-shrink:0;}
+.input-wrap input,.input-wrap select{
+  flex:1;background:transparent;border:none;outline:none;
+  color:white;font-size:16px;font-family:'Poppins',sans-serif;
+  width:100%;
+}
+.input-wrap select option{background:#0a1e0d;color:white;}
+.form-btn{
+  width:100%;margin-top:30px;
+  background:linear-gradient(145deg,var(--green),var(--gold));
+  border:none;padding:16px;border-radius:30px;
+  font-weight:700;font-size:15px;cursor:pointer;
+  color:#071a0f;font-family:'Poppins',sans-serif;
+  transition:0.2s;
+}
+.form-btn:active{transform:scale(0.98);}
+.form-footer{margin-top:20px;font-size:13px;color:var(--muted);text-align:center;line-height:1.5;}
+
+/* ========================= DASHBOARD ========================= */
+#nextelDashboard{
+  display:none;
+  background:var(--bg);
+  min-height:100vh;
+  font-family:'Poppins',sans-serif;
+  color:white;
+  padding-top:78px;
+  padding-bottom:110px;
+  overflow-x:hidden;
+}
+
+/* HEADER */
+.nx-header{
+  position:fixed;top:0;left:0;width:100%;height:78px;
+  background:rgba(4,15,7,0.95);
+  backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 16px;z-index:999;
+  border-bottom:1px solid var(--border);
+}
+.nx-left{display:flex;align-items:center;gap:14px;}
+.nx-menu-btn{
+  width:52px;height:52px;border-radius:18px;
+  background:#0a1e0d;display:flex;align-items:center;
+  justify-content:center;border:1px solid var(--border);
+  cursor:pointer;
+}
+.nx-logo-text{font-family:'Unbounded';font-size:20px;font-weight:700;color:var(--gold);}
+.nx-profile{
+  width:52px;height:52px;border-radius:50%;
+  background:url('https://res.cloudinary.com/mld4edlq/image/upload/nextel/logo.png') center/cover;
+  border:2px solid rgba(201,168,76,0.4);
+}
+
+/* MAIN WRAP */
+.dash-wrap{padding:8px 16px 0;width:100%;display:block;}
+.live-date{font-size:13px;color:#5a8a6a;margin-bottom:6px;text-align:left;display:block;}
+.dash-greeting{font-size:22px;font-weight:700;margin-bottom:16px;text-align:left;display:block;}
+
+/* HERO BALANCE CARD */
+.hero-card{
+  position:relative;overflow:hidden;
+  background:radial-gradient(circle at top right,rgba(37,160,96,0.5),transparent 30%),
+              radial-gradient(circle at bottom right,rgba(201,168,76,0.4),transparent 28%),
+              linear-gradient(145deg,#1a7a4a,#C9A84C);
+  padding:18px;margin-bottom:18px;border-radius:32px;width:100%;
+}
+.hero-small{font-size:12px;letter-spacing:4px;color:rgba(7,26,15,0.8);text-align:left;margin-bottom:14px;font-weight:600;}
+.hero-balance{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.hero-amount{font-size:28px;font-weight:700;color:#071a0f;}
+.eye-btn{
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(0,0,0,0.15);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;border:none;
+}
+.hero-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.hero-mini{
+  background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.2);
+  padding:10px 12px;border-radius:16px;
+}
+.hero-mini-title{font-size:12px;text-align:left;color:rgba(7,26,15,0.75);margin-bottom:3px;line-height:1.3;}
+.hero-mini-amount{font-size:16px;text-align:left;font-weight:700;color:#071a0f;line-height:1.2;}
+.hero-btns{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;}
+.hero-btn{
+  height:40px;padding:0 14px;font-size:12px;border-radius:999px;
+  flex-shrink:0;border:none;font-weight:600;white-space:nowrap;cursor:pointer;
+  font-family:'Poppins',sans-serif;
+}
+.hero-btn.dark{background:#071a0f;color:white;}
+.hero-btn.outline{background:rgba(0,0,0,0.3);color:white;}
+
+/* SECTION TITLE */
+.section-lbl{
+  font-size:12px;text-align:left;letter-spacing:4px;
+  color:#5a8a6a;margin:8px 0 18px;font-weight:600;display:block;
+}
+
+/* USERS ROW */
+.users-row{display:flex;gap:18px;overflow-x:auto;padding-bottom:6px;margin-bottom:26px;}
+.users-row::-webkit-scrollbar{display:none;}
+.user-card{min-width:72px;text-align:center;}
+.user-photo{
+  width:68px;height:68px;border-radius:50%;
+  border:2px solid rgba(201,168,76,0.35);
+  background-size:cover;background-position:center;margin-bottom:8px;
+}
+.user-name{font-size:12px;font-weight:600;margin-bottom:2px;color:#fff;}
+.user-amount{font-size:12px;font-weight:700;color:var(--gold);}
+
+/* ACTION GRID */
+.action-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;width:100%;margin-bottom:20px;
+}
+.action-card{
+  height:102px;border-radius:20px;
+  background:#0a1e0d;
+  border:1px solid var(--border2);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;cursor:pointer;
+}
+.action-text{font-size:11px;color:rgba(255,255,255,0.8);}
+
+/* MUSIC PLAYER */
+.music-card{
+  position:relative;overflow:hidden;
+  margin:18px 0 28px;padding:18px;border-radius:28px;
+  background:radial-gradient(circle at top right,rgba(201,168,76,0.12),transparent 35%),
+              radial-gradient(circle at bottom left,rgba(37,160,96,0.1),transparent 35%),
+              #0a1e0d;
+  border:1px solid var(--border);
+}
+.music-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.music-cover{
+  width:62px;height:62px;border-radius:18px;
+  background:linear-gradient(135deg,var(--gold),var(--green-light));
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.music-info{flex:1;padding:0 12px;}
+.music-title{font-size:15px;font-weight:700;color:white;line-height:1.3;}
+.music-artist{font-size:12px;color:var(--muted);margin-top:2px;}
+.music-progress{
+  height:6px;width:100%;
+  background:rgba(255,255,255,0.08);
+  border-radius:999px;overflow:hidden;margin-bottom:16px;
+}
+.music-bar{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--green-light));
+  border-radius:999px;transition:.2s;
+}
+.music-play-btn{
+  width:42px;height:42px;border:none;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--green-light));
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;
+}
+
+/* FOOTER NAV */
+.footer-nav{
+  position:fixed;bottom:0;left:0;width:100%;height:82px;
+  background:rgba(4,15,7,0.97);
+  backdrop-filter:blur(18px);
+  border-top:1px solid var(--border2);
+  display:flex;justify-content:space-around;align-items:center;
+  z-index:999;
+}
+.footer-item{
+  display:flex;flex-direction:column;align-items:center;
+  gap:6px;font-size:12px;color:#5a8a6a;cursor:pointer;
+}
+.footer-item.active{color:var(--gold);}
+
+/* SIDE MENU */
+.menu-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(4px);display:none;z-index:1000;
+}
+.side-menu{
+  position:fixed;top:0;left:-82%;width:80%;height:100vh;
+  background:#040f07;z-index:1001;transition:0.3s ease;
+  border-right:1px solid var(--border);overflow-y:auto;
+}
+.side-menu.active{left:0;}
+.menu-top{
+  padding:26px 20px;display:flex;align-items:center;gap:14px;
+  border-bottom:1px solid var(--border2);
+}
+.menu-avatar{
+  width:68px;height:68px;border-radius:50%;
+  background:url('https://res.cloudinary.com/mld4edlq/image/upload/nextel/logo.png') center/cover;
+  border:2px solid rgba(201,168,76,0.35);
+}
+.menu-name{font-size:18px;font-weight:600;color:#fff;}
+.menu-tier{margin-top:5px;font-size:13px;color:var(--gold);}
+.menu-item{
+  height:76px;display:flex;align-items:center;gap:18px;
+  padding:0 22px;border-bottom:1px solid var(--border2);
+  cursor:pointer;font-size:15px;color:#fff;
+}
+.menu-item.logout{color:#ff7285;}
+
+/* LOADER */
+#dashLoader{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);
+  z-index:9999;align-items:center;justify-content:center;
+}
+.dash-spinner{
+  width:48px;height:48px;
+  border:4px solid rgba(255,255,255,0.12);
+  border-top:4px solid var(--gold);
+  border-radius:50%;animation:spin 1s linear infinite;
+}
+@keyframes spin{100%{transform:rotate(360deg);}}
+
+/* ========================= ACTIVATION POPUP ========================= */
+#nextelPopup{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);
+  display:none;justify-content:center;align-items:center;
+  z-index:999999;font-family:'Poppins',sans-serif;
+}
+.popup-box{
+  width:90%;max-width:420px;
+  background:linear-gradient(145deg,#040f07,#0a1e0d);
+  border-radius:28px;padding:28px 22px;
+  text-align:center;color:white;
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);
+  border:1px solid var(--border);
+  animation:popIn 0.25s ease;
+}
+@keyframes popIn{from{transform:scale(0.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+.popup-icon{
+  width:80px;height:80px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--gold));
+  display:flex;align-items:center;justify-content:center;margin:0 auto 18px;
+}
+.popup-title{font-size:22px;font-weight:600;margin-bottom:10px;}
+.popup-text{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:22px;}
+.popup-btn{
+  width:100%;padding:16px;border-radius:30px;border:none;
+  font-weight:700;font-size:15px;cursor:pointer;
+  background:linear-gradient(145deg,var(--green),var(--gold));
+  color:#071a0f;transition:0.2s;font-family:'Poppins',sans-serif;
+}
+.popup-btn:active{transform:scale(0.97);}
+
+/* ========================= WITHDRAWAL PAGE ========================= */
+#nextelWithdrawal{
+  display:none;position:fixed;inset:0;
+  background:var(--bg);z-index:99999;
+  overflow-y:auto;font-family:'Poppins',sans-serif;
+  color:white;padding:18px;
+}
+.wd-header{display:flex;align-items:center;gap:14px;margin-bottom:32px;}
+.wd-back{
+  width:44px;height:44px;border-radius:14px;
+  background:#0a1e0d;display:flex;align-items:center;
+  justify-content:center;cursor:pointer;
+  border:1px solid var(--border);font-size:18px;color:var(--gold);
+}
+.wd-title{font-size:22px;font-weight:700;}
+.wallet-card{
+  background:#0a1e0d;border:1px solid var(--border);
+  border-radius:24px;padding:18px;margin-bottom:14px;
+}
+.wallet-top{display:flex;justify-content:space-between;align-items:center;}
+.wallet-name{font-size:16px;font-weight:600;text-align:left;}
+.wallet-desc{font-size:13px;text-align:left;color:var(--muted);margin-top:6px;line-height:1.5;}
+.wallet-balance{font-size:26px;font-weight:700;color:var(--gold);}
+.wd-label{font-size:17px;font-weight:600;margin-top:24px;margin-bottom:12px;text-align:left;}
+.amount-box{
+  background:#0a1e0d;border-radius:24px;padding:20px;
+  border:1px solid var(--border);
+}
+.amount-input{
+  width:100%;background:none;border:none;outline:none;
+  color:white;font-size:40px;font-weight:700;font-family:'Poppins',sans-serif;
+}
+.available-text{margin-top:8px;text-align:left;font-size:14px;color:var(--muted);}
+.quick-grid{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+.quick-btn{
+  background:#0a1e0d;border:1px solid var(--border);
+  color:white;padding:12px 18px;border-radius:16px;
+  font-weight:600;cursor:pointer;font-family:'Poppins',sans-serif;font-size:14px;
+}
+.bank-row{display:flex;gap:8px;margin-top:12px;align-items:stretch;}
+.bank-field{
+  background:#0a1e0d;border:1px solid var(--border);
+  border-radius:18px;padding:14px;color:white;
+  outline:none;box-sizing:border-box;
+  font-family:'Poppins',sans-serif;font-size:14px;
+}
+#wdBankName{flex:1.2;}
+#wdAccountNumber{flex:1;}
+#wdAccountName{flex:1.3;}
+.wd-btn{
+  width:100%;margin-top:24px;height:58px;border:none;
+  border-radius:18px;
+  background:linear-gradient(145deg,var(--green),var(--gold));
+  color:#071a0f;font-size:17px;font-weight:700;cursor:pointer;
+  font-family:'Poppins',sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!-- ========================= SIGN-UP FORM ========================= -->
+<div id="nextelForm">
+
+  <!-- VOICE NOTE BOX -->
+  <!-- <div class="vn-box">
+    <div class="vn-top">
+      <div class="vn-title">Hi, Welcome to Nextel</div>
+      <button class="vn-btn" id="vnBtn">
+        <svg id="vnPlay" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="vnPause" viewBox="0 0 24 24" style="display:none"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>
+      </button>
+    </div>
+    <div class="vn-progress">
+      <span id="vnCurrent">0:00</span>
+      <div class="vn-wave"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      <span id="vnDuration">0:00</span>
+    </div>
+    <div class="vn-text">Please listen to this welcome message before signing up.</div>
+    <audio id="vnAudio" loop preload="auto">
+      <source src="https://res.cloudinary.com/mld4edlq/video/upload/nextel/welcome-audio.mpeg" type="audio/mpeg">
+    </audio>
+  </div> -->
+
+  <img src="https://res.cloudinary.com/mld4edlq/image/upload/nextel/logo.png" class="form-logo" alt="Nextel">
+  <div class="form-title">Sign Up</div>
+  <div class="form-sub">Create your Nextel Connect earning account.</div>
+
+  <span class="form-label">FULL NAME</span>
+  <div class="input-wrap">
+    <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/></svg>
+    <input type="text" id="nameInput" placeholder="John Doe">
+  </div>
+
+  <span class="form-label">USERNAME</span>
+  <div class="input-wrap">
+    <svg viewBox="0 0 24 24"><path d="M15 14c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm-6 0c2.7 0 5-2.3 5-5S11.7 4 9 4 4 6.3 4 9s2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h12v-3c0-1.2.5-2.3 1.3-3.2C11.5 16.5 10.3 16 9 16zm6 0c-.8 0-1.5.1-2.2.3 1.9 1 3.2 2.5 3.2 4.7v3h8v-3c0-3.3-6.7-5-9-5z"/></svg>
+    <input type="text" id="userInput" placeholder="@nextel_user">
+  </div>
+
+  <span class="form-label">EMAIL ADDRESS</span>
+  <div class="input-wrap">
+    <svg viewBox="0 0 24 24"><path d="M12 13L2 6.76V18h20V6.76L12 13zm0-2L22 4H2l10 7z"/></svg>
+    <input type="email" id="emailInput" placeholder="name@example.com">
+  </div>
+
+  <span class="form-label">PHONE NUMBER</span>
+  <div class="input-wrap">
+    <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+    <input type="tel" id="phoneInput" placeholder="08012345678">
+  </div>
+
+  <span class="form-label">SELECT PACKAGE</span>
+  <div class="input-wrap">
+    <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.36C18 2.06 15.94 0 13.36 0c-1.46 0-2.68.81-3.36 2.05C9.32.81 8.1 0 6.64 0 4.06 0 2 2.06 2 4.64c0 .48.11.92.18 1.36H0v14h20V6zm-6.64-4c.9 0 1.64.74 1.64 1.64 0 .49-.2.94-.55 1.36h-2.18C12.03 4.62 12 4.32 12 4c0-.9.74-1.64 1.64-1.64zm-9.72 1.64C3.64 2.74 4.38 2 5.28 2S6.92 2.74 6.92 3.64c0 .32-.03.62-.27 1H4.46c-.35-.42-.55-.87-.55-1.36zM2 18V8h7v10H2zm9 0V8h7v10h-7z"/></svg>
+    <select id="planInput">
+      <option value="" data-amount="0">Choose a package...</option>
+      <option value="Starter Package" data-amount="10000">Starter Package — ₦10,000</option>
+      <option value="Gold Package" data-amount="25000">Gold Package — ₦25,000</option>
+      <option value="Premium Package" data-amount="50000">Premium Package — ₦50,000</option>
+    </select>
+  </div>
+
+  <span class="form-label">PASSWORD</span>
+  <div class="input-wrap">
+    <svg viewBox="0 0 24 24"><path d="M12 17a2 2 0 002-2 2 2 0 00-4 0 2 2 0 002 2zm6-6h-1V9a5 5 0 00-10 0v2H6a2 2 0 00-2 2v7h16v-7a2 2 0 00-2-2zm-3 0H9V9a3 3 0 016 0v2z"/></svg>
+    <input type="password" id="passInput" placeholder="••••••••" minlength="6">
+  </div>
+
+  <button class="form-btn" id="formBtn">CONTINUE TO REGISTRATION →</button>
+  <div class="form-footer">By creating your account, you agree to our Terms &amp; Privacy Policy</div>
+</div>
+
+<!-- ========================= DASHBOARD ========================= -->
+<div id="nextelDashboard">
+
+  <!-- HEADER -->
+  <div class="nx-header">
+    <div class="nx-left">
+      <div class="nx-menu-btn" onclick="openMenu()">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--gold)"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+      </div>
+      <div class="nx-logo-text">Nextel</div>
+    </div>
+    <div class="nx-profile" id="headerProfile"></div>
+  </div>
+
+  <!-- MENU OVERLAY -->
+  <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+
+  <!-- SIDE DRAWER -->
+  <div class="side-menu" id="sideMenu">
+    <div class="menu-top">
+      <div class="menu-avatar" id="menuAvatar"></div>
+      <div>
+        <div class="menu-name" id="menuUserName">User</div>
+        <div class="menu-tier">&#10022; Nextel Starter</div>
+      </div>
+    </div>
+    <div class="menu-item" onclick="closeMenu()">
+      <svg width="22" height="22" fill="var(--gold)" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> Dashboard
+    </div>
+    <div class="menu-item" onclick="openActivation()">
+      <svg width="22" height="22" fill="var(--gold)" viewBox="0 0 24 24"><path d="M13 2L3 14h7v8l11-14h-7z"/></svg> NTU Tasks
+    </div>
+    <div class="menu-item" onclick="openWithdrawal()">
+      <svg width="22" height="22" fill="var(--gold)" viewBox="0 0 24 24"><path d="M21 7H3V5h18m0 4H3v10h18"/></svg> Withdraw
+    </div>
+    <div class="menu-item" onclick="openProfile()">
+      <svg width="22" height="22" fill="var(--gold)" viewBox="0 0 24 24"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4.4 0-8 1.8-8 4v2h16v-2c0-2.2-3.6-4-8-4z"/></svg> My Profile
+    </div>
+    <div class="menu-item" onclick="window.open('https://t.me/nextelconnect','_blank')">
+      <svg width="22" height="22" fill="var(--gold)" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/></svg> Contact Support
+    </div>
+    <div class="menu-item logout" onclick="logoutUser()">
+      <svg width="22" height="22" fill="#ff7285" viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v3H3v4h7v3z"/></svg> Log Out
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="dash-wrap">
+    <span class="live-date" id="liveDate"></span>
+    <span class="dash-greeting">Hey, <span id="dashName">User</span> &#128075;</span>
+
+    <!-- HERO CARD -->
+    <div class="hero-card">
+      <div class="hero-small">TOTAL NTU EARNINGS</div>
+      <div class="hero-balance">
+        <div class="hero-amount" id="mainBalance">&#8358;0</div>
+        <button class="eye-btn" onclick="toggleBalance()">
+          <svg width="20" height="20" fill="rgba(7,26,15,0.7)" viewBox="0 0 24 24"><path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7z"/></svg>
+        </button>
+      </div>
+      <div class="hero-mini-grid">
+        <div class="hero-mini">
+          <div class="hero-mini-title">Daily Call Earnings</div>
+          <div class="hero-mini-amount">&#8358;0.00</div>
+        </div>
+        <div class="hero-mini">
+          <div class="hero-mini-title">Referral Bonus</div>
+          <div class="hero-mini-amount">&#8358;0.00</div>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <button class="hero-btn dark" id="activationStatusBtn">Not Activated</button>
+        <button class="hero-btn outline" onclick="openWithdrawal()">Withdrawal Limit</button>
+        <button class="hero-btn dark" onclick="openActivation()">How It Works</button>
+      </div>
+    </div>
+
+    <!-- USERS ROW -->
+    <span class="section-lbl">RECENTLY CREDITED USERS</span>
+    <div class="users-row">
+      <div class="user-card"><div class="user-photo" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400')"></div><div class="user-name">Zinab</div><div class="user-amount">&#8358;83,200</div></div>
+      <div class="user-card"><div class="user-photo" style="background-image:url('https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=400')"></div><div class="user-name">Favour</div><div class="user-amount">&#8358;52,000</div></div>
+      <div class="user-card"><div class="user-photo" style="background-image:url('https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400')"></div><div class="user-name">Sammy</div><div class="user-amount">&#8358;67,500</div></div>
+      <div class="user-card"><div class="user-photo" style="background-image:url('https://images.unsplash.com/photo-1504593811423-6dd665756598?q=80&w=400')"></div><div class="user-name">Peter</div><div class="user-amount">&#8358;41,000</div></div>
+      <div class="user-card"><div class="user-photo" style="background-image:url('https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400')"></div><div class="user-name">Bolu</div><div class="user-amount">&#8358;93,700</div></div>
+      <div class="user-card"><div class="user-photo" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400')"></div><div class="user-name">Kareem</div><div class="user-amount">&#8358;58,400</div></div>
+      <div class="user-card"><div class="user-photo" style="background-image:url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=400')"></div><div class="user-name">Amaka</div><div class="user-amount">&#8358;72,100</div></div>
+      <div class="user-card"><div class="user-photo" style="background-image:url('https://images.unsplash.com/photo-1463453091185-61582044d556?q=80&w=400')"></div><div class="user-name">Chinedu</div><div class="user-amount">&#8358;48,800</div></div>
+    </div>
+
+    <!-- ACTION GRID -->
+    <div class="action-grid">
+      <div class="action-card" onclick="openActivation()">
+        <svg width="24" height="24" fill="var(--gold)" viewBox="0 0 24 24"><path d="M13 2L3 14h7v8l11-14h-7z"/></svg>
+        <div class="action-text">Earn NTU</div>
+      </div>
+      <div class="action-card" onclick="openWithdrawal()">
+        <svg width="24" height="24" fill="var(--gold)" viewBox="0 0 24 24"><path d="M21 7H3V5h18m0 4H3v10h18"/></svg>
+        <div class="action-text">Withdraw</div>
+      </div>
+      <div class="action-card" onclick="openActivation()">
+        <svg width="24" height="24" fill="var(--gold)" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a2.48 2.48 0 000-1.39l7-4.11A2.99 2.99 0 0018 7.91a3 3 0 10-3-3c0 .23.03.45.08.66l-7 4.11a3 3 0 100 4.66l7.05 4.14c-.05.2-.08.42-.08.64a3 3 0 103-3z"/></svg>
+        <div class="action-text">Invite</div>
+      </div>
+      <div class="action-card" onclick="openProfile()">
+        <svg width="24" height="24" fill="var(--gold)" viewBox="0 0 24 24"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4.4 0-8 1.8-8 4v2h16v-2c0-2.2-3.6-4-8-4z"/></svg>
+        <div class="action-text">Profile</div>
+      </div>
+    </div>
+
+    <!-- MUSIC PLAYER -->
+    <div class="music-card">
+      <div class="music-top">
+        <div style="display:flex;align-items:center;gap:14px;flex:1;">
+          <div class="music-cover">
+            <svg width="28" height="28" fill="#071a0f" viewBox="0 0 24 24"><path d="M12 3v10.5a3.5 3.5 0 101 2.45V8h6V3z"/></svg>
+          </div>
+          <div class="music-info">
+            <div class="music-title">Welcome To Nextel</div>
+            <div class="music-artist">Official Dashboard Audio</div>
+          </div>
+        </div>
+        <button class="music-play-btn" id="musicToggle">
+          <svg id="musicIcon" width="18" height="18" fill="#071a0f" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+      </div>
+      <div class="music-progress">
+        <div class="music-bar" id="musicBar"></div>
+      </div>
+      <audio id="dashMusic" loop>
+        <source src="https://res.cloudinary.com/mld4edlq/video/upload/nextel/welcome-audio.mpeg" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+
+  <!-- FOOTER NAV -->
+  <div class="footer-nav">
+    <div class="footer-item active">
+      <svg width="22" height="22" fill="var(--gold)" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      Home
+    </div>
+    <div class="footer-item" onclick="openActivation()">
+      <svg width="22" height="22" fill="#5a8a6a" viewBox="0 0 24 24"><path d="M13 2L3 14h7v8l11-14h-7z"/></svg>
+      Tasks
+    </div>
+    <div class="footer-item" onclick="openWithdrawal()">
+      <svg width="22" height="22" fill="#5a8a6a" viewBox="0 0 24 24"><path d="M21 7H3V5h18m0 4H3v10h18"/></svg>
+      Withdraw
+    </div>
+    <div class="footer-item" onclick="openActivation()">
+      <svg width="22" height="22" fill="#5a8a6a" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7a2.48 2.48 0 000-1.39l7-4.11A2.99 2.99 0 0018 7.91a3 3 0 10-3-3c0 .23.03.45.08.66l-7 4.11a3 3 0 100 4.66l7.05 4.14c-.05.2-.08.42-.08.64a3 3 0 103-3z"/></svg>
+      Network
+    </div>
+    <div class="footer-item" onclick="openProfile()">
+      <svg width="22" height="22" fill="#5a8a6a" viewBox="0 0 24 24"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zm0 2c-4.4 0-8 1.8-8 4v2h16v-2c0-2.2-3.6-4-8-4z"/></svg>
+      Profile
+    </div>
+  </div>
+
+  <!-- LOADER -->
+  <div id="dashLoader"><div class="dash-spinner"></div></div>
+
+</div><!-- /nextelDashboard -->
+
+<!-- ========================= ACTIVATION POPUP ========================= -->
+<div id="nextelPopup" onclick="closePopup(event)">
+  <div class="popup-box" onclick="event.stopPropagation()">
+    <div class="popup-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="#071a0f"><path d="M12 1a5 5 0 00-5 5v3H6a2 2 0 00-2 2v9h16v-9a2 2 0 00-2-2h-1V6a5 5 0 00-5-5zm-3 8V6a3 3 0 016 0v3H9z"/></svg>
+    </div>
+    <div class="popup-title">Activate Your Account</div>
+    <div class="popup-text">You have a &#8358;10,000 NTU earning balance waiting. To withdraw funds and unlock all income streams, complete your one-time Starter Package activation.</div>
+    <button class="popup-btn" id="activateBtn">Activate Now &mdash; &#8358;10,000</button>
+  </div>
+</div>
+
+<!-- ========================= WITHDRAWAL PAGE ========================= -->
+<div id="nextelWithdrawal">
+  <div class="wd-header">
+    <div class="wd-back" onclick="closeWithdrawal()">&#8592;</div>
+    <div class="wd-title">Withdrawal</div>
+  </div>
+
+  <div class="wallet-card">
+    <div class="wallet-top">
+      <div>
+        <div class="wallet-name">NTU Referral Wallet</div>
+        <div class="wallet-desc">Referral commissions &amp; bonus earnings.</div>
+      </div>
+      <div class="wallet-balance">&#8358;0</div>
+    </div>
+  </div>
+
+  <div class="wallet-card">
+    <div class="wallet-top">
+      <div>
+        <div class="wallet-name">NTU Main Wallet</div>
+        <div class="wallet-desc">Available withdrawal balance.</div>
+      </div>
+      <div class="wallet-balance" id="wdWalletBalance">&#8358;10,000</div>
+    </div>
+  </div>
+
+  <div class="wd-label">Amount To Withdraw</div>
+  <div class="amount-box">
+    <input type="number" id="wdAmount" class="amount-input" placeholder="0">
+    <div class="available-text" id="wdAvailable">Available : &#8358;10,000</div>
+  </div>
+
+  <div class="quick-grid">
+    <button class="quick-btn" onclick="setWdAmount(2000)">&#8358;2,000</button>
+    <button class="quick-btn" onclick="setWdAmount(5000)">&#8358;5,000</button>
+    <button class="quick-btn" onclick="setWdAmount(10000)">&#8358;10,000</button>
+    <button class="quick-btn" onclick="setWdAmount(25000)">&#8358;25,000</button>
+  </div>
+
+  <div class="wd-label">Destination Bank</div>
+  <div class="bank-row">
+    <select id="wdBankName" class="bank-field">
+      <option value="">Bank</option>
+      <option>Access Bank</option><option>Citibank</option><option>Ecobank</option>
+      <option>FCMB</option><option>Fidelity Bank</option><option>First Bank</option>
+      <option>GTBank</option><option>Heritage Bank</option><option>Jaiz Bank</option>
+      <option>Keystone Bank</option><option>Kuda Bank</option><option>Moniepoint</option>
+      <option>OPay</option><option>PalmPay</option><option>Polaris Bank</option>
+      <option>Providus Bank</option><option>Stanbic IBTC</option><option>Sterling Bank</option>
+      <option>UBA</option><option>Union Bank</option><option>Unity Bank</option>
+      <option>Wema Bank</option><option>Zenith Bank</option>
+    </select>
+    <input id="wdAccountNumber" class="bank-field" placeholder="Account No" maxlength="10" inputmode="numeric">
+    <input id="wdAccountName" class="bank-field" placeholder="Account Name">
+  </div>
+
+  <button class="wd-btn" onclick="submitWithdrawal()">Continue</button>
+</div>
+
+<!-- ========================= SCRIPTS ========================= -->
+<script>
+
+/* ---- VOICE NOTE (FORM) ---- */
+/*
+const vnAudio = document.getElementById("vnAudio");
+const vnBtn = document.getElementById("vnBtn");
+const vnPlay = document.getElementById("vnPlay");
+const vnPause = document.getElementById("vnPause");
+const vnCurrent = document.getElementById("vnCurrent");
+const vnDuration = document.getElementById("vnDuration");
+let vnStarted = false;
+
+function fmtTime(t){
+  const m=Math.floor(t/60), s=Math.floor(t%60).toString().padStart(2,"0");
+  return m+":"+s;
+}
+function startVN(){
+  if(vnStarted) return;
+  vnAudio.play().then(()=>{
+    vnStarted=true;
+    vnPlay.style.display="none";
+    vnPause.style.display="block";
+  }).catch(()=>{});
+}
+document.querySelectorAll("#nextelForm input, #nextelForm .input-wrap").forEach(el=>{
+  el.addEventListener("click", startVN);
+  el.addEventListener("touchstart", startVN, {passive:true});
+  el.addEventListener("focus", startVN);
+});
+vnBtn.addEventListener("click",()=>{
+  if(vnAudio.paused){
+    vnAudio.play();
+    vnPlay.style.display="none";vnPause.style.display="block";
+  } else {
+    vnAudio.pause();
+    vnPlay.style.display="block";vnPause.style.display="none";
+  }
+});
+vnAudio.addEventListener("timeupdate",()=>{ vnCurrent.innerText=fmtTime(vnAudio.currentTime); });
+vnAudio.addEventListener("loadedmetadata",()=>{ vnDuration.innerText=fmtTime(vnAudio.duration); });
+*/
+
+/* ---- FORM SUBMIT ---- */
+document.getElementById("formBtn").onclick = function(){
+  const name = document.getElementById("nameInput").value.trim();
+  const username = document.getElementById("userInput").value.trim();
+  const email = document.getElementById("emailInput").value.trim();
+  const phone = document.getElementById("phoneInput").value.trim();
+  const planSel = document.getElementById("planInput");
+  const plan = planSel.value;
+  const activationAmount = Number(planSel.options[planSel.selectedIndex].dataset.amount || 0);
+  const password = document.getElementById("passInput").value;
+
+  if(!name || !username || !email || !phone || !plan || !password){
+    alert("Please fill all fields and select a package"); return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    alert("Enter a valid email address"); return;
+  }
+  if(password.length < 6){
+    alert("Password must be at least 6 characters"); return;
+  }
+
+  localStorage.setItem("nextelUser", JSON.stringify({name,username,email,phone,password,plan,activationAmount}));
+  localStorage.setItem("nextelSessionExpiry", Date.now() + 10*60*1000);
+
+  const btn = this;
+  btn.innerText = "Processing registration...";
+  btn.disabled = true;
+
+  setTimeout(()=>{
+    btn.innerText = "Registration successful!";
+    setTimeout(()=>{
+      document.getElementById("nextelForm").style.display = "none";
+      document.getElementById("nextelDashboard").style.display = "block";
+      loadDashboard();
+      startDashMusic();
+    }, 1200);
+  }, 1500);
+};
+
+/* ---- LOAD DASHBOARD ---- */
+function loadDashboard(){
+  const user = JSON.parse(localStorage.getItem("nextelUser"));
+  if(!user) return;
+
+  document.getElementById("dashName").innerText = user.name;
+  document.getElementById("menuUserName").innerText = user.name;
+  document.getElementById("mainBalance").innerText = "₦10,000";
+
+  const now = new Date();
+  document.getElementById("liveDate").innerText = now.toLocaleDateString("en-US",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+}
+
+/* ---- AUTO-LOAD IF RETURNING USER ---- */
+window.addEventListener("load",()=>{
+  const user = JSON.parse(localStorage.getItem("nextelUser"));
+  if(!user) return;
+  document.getElementById("nextelForm").style.display = "none";
+  document.getElementById("nextelDashboard").style.display = "block";
+  loadDashboard();
+});
+
+/* ---- MENU ---- */
+function openMenu(){ document.getElementById("sideMenu").classList.add("active"); document.getElementById("menuOverlay").style.display="block"; }
+function closeMenu(){ document.getElementById("sideMenu").classList.remove("active"); document.getElementById("menuOverlay").style.display="none"; }
+
+/* ---- BALANCE TOGGLE ---- */
+let balanceHidden = false;
+function toggleBalance(){
+  const el = document.getElementById("mainBalance");
+  balanceHidden = !balanceHidden;
+  el.innerText = balanceHidden ? "₦••••••" : "₦10,000";
+}
+
+/* ---- ACTIVATION POPUP ---- */
+function openActivation(){ closeMenu(); document.getElementById("nextelPopup").style.display="flex"; document.body.style.overflow="hidden"; }
+function closePopup(e){ if(e.target.id==="nextelPopup"){ document.getElementById("nextelPopup").style.display="none"; document.body.style.overflow="auto"; } }
+
+window.addEventListener("load",()=>{
+  document.getElementById("activateBtn").onclick = function(){
+    this.innerText = "Opening payment...";
+    this.disabled = true;
+    window.location.href = "payment.html";
+    setTimeout(()=>{ this.innerText="Activate Now — ₦10,000"; this.disabled=false; },2000);
+  };
+});
+
+/* ---- WITHDRAWAL ---- */
+function openWithdrawal(){
+  closeMenu();
+  document.getElementById("nextelWithdrawal").style.display = "block";
+  document.body.style.overflow = "hidden";
+}
+function closeWithdrawal(){
+  document.getElementById("nextelWithdrawal").style.display = "none";
+  document.body.style.overflow = "auto";
+}
+function setWdAmount(n){ document.getElementById("wdAmount").value = n; }
+document.getElementById("wdAccountNumber").addEventListener("input",function(){ this.value=this.value.replace(/\D/g,""); });
+
+function submitWithdrawal(){
+  const amount = Number(document.getElementById("wdAmount").value);
+  const bank = document.getElementById("wdBankName").value;
+  const accNo = document.getElementById("wdAccountNumber").value;
+  const accName = document.getElementById("wdAccountName").value;
+  if(!amount || !bank || !accNo || !accName){ alert("Please complete all fields"); return; }
+  if(amount > 10000){ alert("Insufficient wallet balance"); return; }
+  closeWithdrawal();
+  openActivation();
+}
+
+/* ---- PROFILE ---- */
+function openProfile(){ closeMenu(); alert("Profile page coming soon"); }
+
+/* ---- LOGOUT ---- */
+function logoutUser(){
+  localStorage.removeItem("nextelUser");
+  localStorage.removeItem("nextelSessionExpiry");
+  closeMenu();
+  document.getElementById("nextelDashboard").style.display = "none";
+  document.getElementById("nextelForm").style.display = "block";
+}
+
+/* ---- DASHBOARD MUSIC ---- */
+const dashMusic = document.getElementById("dashMusic");
+const musicToggle = document.getElementById("musicToggle");
+const musicIcon = document.getElementById("musicIcon");
+const musicBar = document.getElementById("musicBar");
+
+function startDashMusic(){
+  dashMusic.play().catch(()=>{});
+  musicIcon.innerHTML = '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
+}
+
+musicToggle.addEventListener("click",()=>{
+  if(dashMusic.paused){
+    dashMusic.play();
+    musicIcon.innerHTML = '<path d="M6 5h4v14H6zm8 0h4v14h-4z"/>';
+  } else {
+    dashMusic.pause();
+    musicIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+  }
+});
+dashMusic.addEventListener("timeupdate",()=>{
+  if(dashMusic.duration){ musicBar.style.width = (dashMusic.currentTime/dashMusic.duration*100)+"%"; }
+});
+
+</script>
+</body>
+</html>

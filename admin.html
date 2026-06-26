@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<title>Nextel Admin</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:#030d06;color:#fff;font-family:'Poppins',sans-serif;min-height:100vh;}
+:root{
+  --gold:#C9A84C;--gold2:#D4A843;
+  --green:#1a7a4a;--green-light:#25a060;
+  --bg:#030d06;--card:#091408;--card2:#0d1c0f;
+  --border:rgba(201,168,76,0.15);--border2:rgba(255,255,255,0.05);
+  --muted:rgba(255,255,255,0.5);--red:#ff4d6d;--teal:#00e0b0;
+}
+
+/* ── LOGIN OVERLAY ── */
+#loginOverlay{
+  position:fixed;inset:0;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  z-index:9999;padding:24px;
+}
+.login-box{
+  width:100%;max-width:380px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:24px;padding:36px 28px;text-align:center;
+}
+.login-logo{font-family:'Unbounded';font-size:22px;font-weight:700;color:var(--gold);margin-bottom:6px;}
+.login-sub{font-size:13px;color:var(--muted);margin-bottom:28px;}
+.login-input{
+  width:100%;background:#0d1c0f;border:1px solid var(--border);
+  border-radius:14px;padding:14px 16px;color:#fff;
+  font-size:15px;font-family:'Poppins',sans-serif;outline:none;
+  margin-bottom:14px;
+}
+.login-btn{
+  width:100%;height:50px;background:var(--gold);color:#030d06;
+  border:none;border-radius:14px;font-size:15px;font-weight:700;
+  cursor:pointer;font-family:'Poppins',sans-serif;transition:0.2s;
+}
+.login-btn:active{transform:scale(0.98);}
+.login-error{font-size:13px;color:var(--red);margin-top:10px;min-height:18px;}
+
+/* ── ADMIN SHELL ── */
+#adminShell{display:none;}
+
+/* ── HEADER ── */
+.admin-header{
+  background:rgba(3,13,6,0.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 20px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:100;
+}
+.admin-logo{font-family:'Unbounded';font-size:18px;font-weight:700;color:var(--gold);}
+.admin-logo span{color:rgba(255,255,255,0.4);font-size:12px;font-family:'Poppins';font-weight:400;margin-left:8px;}
+.logout-btn{
+  background:rgba(255,77,109,0.12);border:1px solid rgba(255,77,109,0.3);
+  color:var(--red);border-radius:10px;padding:8px 16px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  font-family:'Poppins',sans-serif;transition:0.2s;
+}
+.logout-btn:hover{background:rgba(255,77,109,0.2);}
+
+/* ── CONTENT ── */
+.admin-body{padding:24px 20px;max-width:1000px;margin:0 auto;}
+
+/* ── SECTION ── */
+.section{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:22px 20px;margin-bottom:20px;
+}
+.section-title{
+  font-size:13px;letter-spacing:3px;color:var(--gold);
+  font-weight:600;margin-bottom:18px;text-transform:uppercase;
+}
+
+/* ── STATS GRID ── */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+@media(max-width:500px){.stats-grid{grid-template-columns:1fr 1fr;}}
+.stat-card{
+  background:var(--card2);border:1px solid var(--border);
+  border-radius:16px;padding:16px;
+}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:2px;margin-bottom:8px;font-weight:500;}
+.stat-value{font-size:22px;font-weight:700;color:#fff;}
+.stat-value.gold{color:var(--gold);}
+.stat-value.teal{color:var(--teal);}
+
+/* ── LINK SETTINGS ── */
+.link-row{margin-bottom:16px;}
+.link-label{font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:6px;display:block;font-weight:500;}
+.link-current{
+  font-size:12px;color:var(--green-light);margin-bottom:8px;
+  word-break:break-all;min-height:16px;
+}
+.link-input-row{display:flex;gap:8px;align-items:stretch;}
+.link-input{
+  flex:1;background:#0d1c0f;border:1px solid var(--border);
+  border-radius:12px;padding:12px 14px;color:#fff;
+  font-size:14px;font-family:'Poppins',sans-serif;outline:none;
+}
+.link-input:focus{border-color:rgba(201,168,76,0.4);}
+.save-btn{
+  background:var(--gold);color:#030d06;border:none;
+  border-radius:12px;padding:0 20px;font-size:14px;
+  font-weight:700;cursor:pointer;font-family:'Poppins',sans-serif;
+  white-space:nowrap;transition:0.2s;min-width:70px;
+}
+.save-btn:active{transform:scale(0.97);}
+.save-btn:disabled{opacity:0.5;cursor:not-allowed;}
+.link-status{font-size:12px;color:var(--green-light);margin-top:6px;min-height:16px;}
+.link-status.error{color:var(--red);}
+
+.divider{height:1px;background:var(--border2);margin:16px 0;}
+
+/* ── TABLE ── */
+.table-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:gap;}
+.refresh-btn{
+  background:var(--card2);border:1px solid var(--border);
+  color:var(--gold);border-radius:10px;padding:8px 14px;
+  font-size:13px;font-weight:600;cursor:pointer;
+  font-family:'Poppins',sans-serif;transition:0.2s;
+}
+.refresh-btn:hover{background:#132c1a;}
+
+.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--border2);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead tr{background:#0a1a0c;}
+th{
+  padding:12px 14px;text-align:left;
+  font-size:11px;letter-spacing:2px;color:var(--muted);
+  font-weight:600;white-space:nowrap;border-bottom:1px solid var(--border2);
+}
+td{padding:12px 14px;border-bottom:1px solid var(--border2);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,0.02);}
+.empty-state{text-align:center;color:var(--muted);padding:40px!important;}
+
+.badge-active{
+  background:rgba(37,160,96,0.15);color:var(--green-light);
+  border:1px solid rgba(37,160,96,0.3);
+  border-radius:999px;padding:3px 10px;font-size:11px;font-weight:600;
+}
+.badge-pending{
+  background:rgba(201,168,76,0.12);color:var(--gold);
+  border:1px solid rgba(201,168,76,0.25);
+  border-radius:999px;padding:3px 10px;font-size:11px;font-weight:600;
+}
+
+/* ── TOAST ── */
+#toastBar{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--green-light);color:#030d06;
+  padding:12px 24px;border-radius:999px;font-size:14px;font-weight:600;
+  z-index:99999;opacity:0;transition:0.3s;white-space:nowrap;
+}
+#toastBar.show{transform:translateX(-50%) translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginOverlay">
+  <div class="login-box">
+    <div class="login-logo">Nextel</div>
+    <div class="login-sub">Admin Portal — Enter password to continue</div>
+    <input class="login-input" type="password" id="passwordInput" placeholder="Admin password">
+    <button class="login-btn" id="loginBtn">Login</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- ADMIN SHELL -->
+<div id="adminShell">
+
+  <div class="admin-header">
+    <div class="admin-logo">Nextel <span>Admin</span></div>
+    <button class="logout-btn" id="logoutBtn">Log Out</button>
+  </div>
+
+  <div class="admin-body">
+
+    <!-- LINK SETTINGS -->
+    <div class="section">
+      <div class="section-title">Contact Link Settings</div>
+
+      <!-- WHATSAPP -->
+      <div class="link-row">
+        <span class="link-label">WHATSAPP LINK</span>
+        <div class="link-current" id="currentWADisplay">Loading...</div>
+        <div class="link-input-row">
+          <input class="link-input" type="url" id="waLinkInput" placeholder="https://wa.me/2348012345678">
+          <button class="save-btn" id="saveWABtn">Save</button>
+        </div>
+        <div class="link-status" id="waStatus"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- TELEGRAM -->
+      <div class="link-row">
+        <span class="link-label">TELEGRAM LINK</span>
+        <div class="link-current" id="currentTGDisplay">Loading...</div>
+        <div class="link-input-row">
+          <input class="link-input" type="url" id="tgLinkInput" placeholder="https://t.me/nextelconnect">
+          <button class="save-btn" id="saveTGBtn">Save</button>
+        </div>
+        <div class="link-status" id="tgStatus"></div>
+      </div>
+    </div>
+
+  </div><!-- /admin-body -->
+</div><!-- /adminShell -->
+
+<div id="toastBar"></div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp }   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc }
+                           from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey:            "AIzaSyDrnmtx0LkfMKytzTKQZwXCg1JKZXiJmtU",
+  authDomain:        "glamour-28049.firebaseapp.com",
+  projectId:         "glamour-28049",
+  storageBucket:     "glamour-28049.firebasestorage.app",
+  messagingSenderId: "22177815395",
+  appId:             "1:22177815395:web:2ca7caa2b1626299675156"
+};
+
+const ADMIN_PASSWORD = "nextel002";
+const SESSION_KEY    = "nextel_admin_authed";
+
+const app = initializeApp(firebaseConfig);
+const db  = getFirestore(app, "(default)");
+
+const CONFIG_DOC = doc(db, "account", "nextelife");
+
+/* ── Toast ── */
+function toast(msg) {
+  const bar = document.getElementById("toastBar");
+  bar.textContent = msg;
+  bar.classList.add("show");
+  setTimeout(() => bar.classList.remove("show"), 2200);
+}
+
+/* ── Login ── */
+function revealAdmin() {
+  document.getElementById("loginOverlay").style.display = "none";
+  document.getElementById("adminShell").style.display   = "block";
+  loadConfig();
+}
+
+function checkSession() {
+  if (sessionStorage.getItem(SESSION_KEY) === "1") revealAdmin();
+}
+
+document.getElementById("loginBtn").addEventListener("click", () => {
+  const val = document.getElementById("passwordInput").value;
+  const err = document.getElementById("loginError");
+  if (val === ADMIN_PASSWORD) {
+    sessionStorage.setItem(SESSION_KEY, "1");
+    err.textContent = "";
+    revealAdmin();
+  } else {
+    err.textContent = "Incorrect password.";
+    document.getElementById("passwordInput").value = "";
+  }
+});
+document.getElementById("passwordInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") document.getElementById("loginBtn").click();
+});
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  sessionStorage.removeItem(SESSION_KEY);
+  location.reload();
+});
+checkSession();
+
+/* ── Load Config ── */
+async function loadConfig() {
+  try {
+    const snap = await getDoc(CONFIG_DOC);
+    const data = snap.exists() ? snap.data() : {};
+
+    const wa = data.whatsappLink || "";
+    const tg = data.telegramLink || "";
+
+    document.getElementById("currentWADisplay").textContent = wa || "Not set";
+    document.getElementById("waLinkInput").value = wa;
+    document.getElementById("currentTGDisplay").textContent = tg || "Not set";
+    document.getElementById("tgLinkInput").value = tg;
+  } catch (err) {
+    document.getElementById("currentWADisplay").textContent = "Error loading";
+    document.getElementById("currentTGDisplay").textContent = "Error loading";
+  }
+}
+
+/* ── Save WhatsApp ── */
+document.getElementById("saveWABtn").addEventListener("click", async () => {
+  const btn    = document.getElementById("saveWABtn");
+  const status = document.getElementById("waStatus");
+  const link   = document.getElementById("waLinkInput").value.trim();
+
+  if (!link.startsWith("http")) {
+    status.textContent = "Enter a valid URL starting with https://";
+    status.className   = "link-status error";
+    return;
+  }
+  btn.disabled = true; btn.textContent = "Saving…"; status.textContent = "";
+  try {
+    await setDoc(CONFIG_DOC, { whatsappLink: link }, { merge: true });
+    document.getElementById("currentWADisplay").textContent = link;
+    status.textContent = "✓ WhatsApp link saved.";
+    status.className   = "link-status";
+    toast("WhatsApp link updated!");
+  } catch (err) {
+    status.textContent = "Save failed — check Firestore rules.";
+    status.className   = "link-status error";
+  } finally {
+    btn.disabled = false; btn.textContent = "Save";
+  }
+});
+
+/* ── Save Telegram ── */
+document.getElementById("saveTGBtn").addEventListener("click", async () => {
+  const btn    = document.getElementById("saveTGBtn");
+  const status = document.getElementById("tgStatus");
+  const link   = document.getElementById("tgLinkInput").value.trim();
+
+  if (!link.startsWith("http")) {
+    status.textContent = "Enter a valid URL starting with https://";
+    status.className   = "link-status error";
+    return;
+  }
+  btn.disabled = true; btn.textContent = "Saving…"; status.textContent = "";
+  try {
+    await setDoc(CONFIG_DOC, { telegramLink: link }, { merge: true });
+    document.getElementById("currentTGDisplay").textContent = link;
+    status.textContent = "✓ Telegram link saved.";
+    status.className   = "link-status";
+    toast("Telegram link updated!");
+  } catch (err) {
+    status.textContent = "Save failed — check Firestore rules.";
+    status.className   = "link-status error";
+  } finally {
+    btn.disabled = false; btn.textContent = "Save";
+  }
+});
+
+function esc(str) {
+  return String(str)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+</script>
+</body>
+</html>

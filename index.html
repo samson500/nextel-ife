@@ -1,0 +1,852 @@
+<!DOCTYPE HTML><html lang="en">
+<head>
+<title>Nextel Connect - Earn From Every Call You Make</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="light only" />
+<meta name="description" content="Nextel Connect — Nigeria's first telecom earning platform. Every call you make earns you money." />
+<meta property="og:title" content="Nextel Connect - Earn From Every Call You Make" />
+<meta property="og:type" content="website" />
+<meta property="og:description" content="Every call you make earns you money. Join Nextel Connect today." />
+<link href="https://fonts.googleapis.com/css2?display=swap&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Unbounded:ital,wght@0,600;0,700;0,900" rel="stylesheet" type="text/css" />
+<style>
+html,body,div,span,h1,h2,h3,h4,h5,h6,p,blockquote,a,img,ul,ol,li,fieldset,form,label,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,footer,header,nav,section{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+article,aside,footer,header,nav,section{display:block;}
+body{line-height:1;}
+ol,ul{list-style:none;}
+*,*::before,*::after{box-sizing:border-box;}
+
+body{
+  background-color:#071a0f;
+  font-family:'Poppins',sans-serif;
+  color:#fff;
+  min-height:100vh;
+  overflow-x:hidden;
+  word-wrap:break-word;
+}
+body::before{
+  content:'';
+  display:block;
+  height:100%;
+  left:0;
+  pointer-events:none;
+  position:fixed;
+  top:0;
+  width:100vw;
+  z-index:0;
+  background:linear-gradient(145deg,#030e07 0%,#071a0f 60%,#0a2212 100%);
+}
+
+:root{
+  --dark:#071a0f;
+  --green:#1a7a4a;
+  --green-light:#25a060;
+  --gold:#C9A84C;
+  --gold-light:#D4A843;
+  --muted:rgba(255,255,255,0.6);
+  --border:rgba(201,168,76,0.18);
+}
+
+.site-wrapper{
+  position:relative;
+  z-index:2;
+  align-items:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  min-height:100vh;
+  overflow:hidden;
+}
+.site-main{
+  align-items:center;
+  display:flex;
+  flex-grow:0;
+  flex-shrink:0;
+  justify-content:center;
+  max-width:100%;
+  position:relative;
+  width:100%;
+  z-index:1;
+}
+.site-main > .inner{
+  max-width:100%;
+  position:relative;
+  width:90rem;
+  z-index:1;
+  padding:0 1.25rem;
+}
+.site-main > .inner > *{
+  margin-top:0.875rem;
+  margin-bottom:0.875rem;
+}
+.site-main > .inner > :first-child{margin-top:0!important;}
+.site-main > .inner > :last-child{margin-bottom:0!important;}
+.full{
+  margin-left:-1.25rem;
+  max-width:calc(100% + 2.5rem + 0.4725px);
+  width:calc(100% + 2.5rem + 0.4725px);
+}
+.full.screen{
+  border-radius:0!important;
+  max-width:100vw;
+  position:relative;
+  width:100vw;
+  left:50%;
+  margin-left:-50vw;
+}
+
+.sp-6{height:6px;display:block;}
+.sp-12{height:12px;display:block;}
+.sp-18{height:18px;display:block;}
+.sp-24{height:24px;display:block;}
+.sp-30{height:30px;display:block;}
+.sp-60{height:60px;display:block;}
+
+.divider{display:block;width:100%;}
+.divider.gold-line{height:1px;background:rgba(201,168,76,0.4);}
+
+/* ===== FIXED HEADER ===== */
+#fixedHeaderWrapper{
+  position:fixed!important;
+  top:0!important;
+  left:0!important;
+  width:100vw;
+  z-index:999999;
+  transform:none!important;
+  filter:none!important;
+}
+.nextel-header{
+  width:100%;
+  height:72px;
+  background:#040f07;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 18px;
+  box-sizing:border-box;
+  border-bottom:1px solid var(--border);
+}
+.nextel-left{display:flex;align-items:center;gap:10px;}
+.nextel-logo-img{width:38px;height:38px;object-fit:cover;border-radius:8px;}
+.nextel-logo-text{color:var(--gold);font-size:18px;font-weight:700;letter-spacing:0.3px;font-family:'Unbounded',sans-serif;}
+.nextel-menu{font-size:26px;color:var(--gold);cursor:pointer;transition:0.2s;}
+.nextel-menu:active{transform:scale(0.9);}
+
+.nextel-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);z-index:99998;display:none;}
+.nextel-side{
+  position:fixed;top:0;right:-280px;width:260px;height:100%;
+  background:linear-gradient(145deg,#040f07,#0a1e0d);
+  z-index:99999;padding:25px 20px;
+  transition:0.35s ease;display:flex;flex-direction:column;
+}
+.nextel-side.active{right:0;}
+.nextel-close{font-size:30px;color:var(--gold);align-self:flex-end;cursor:pointer;}
+.nextel-links{margin-top:30px;display:flex;flex-direction:column;gap:16px;}
+.nextel-links a{
+  text-decoration:none;color:white;padding:14px;border-radius:14px;
+  background:linear-gradient(145deg,#0d2414,#132c1a);
+  border:1px solid var(--border);font-weight:500;text-align:center;transition:0.2s;
+}
+.nextel-links a:active{transform:scale(0.96);border-color:var(--gold);}
+
+.header-pad{height:72px;display:block;}
+
+/* ===== HERO ===== */
+.hero-headline{
+  text-align:center;
+  color:#fff;
+  font-family:'Unbounded',sans-serif;
+  font-size:clamp(1.3rem,5vw,2.2rem);
+  line-height:1.25;
+  font-weight:700;
+}
+.hero-headline span{color:var(--gold);}
+.hero-sub{
+  text-align:center;
+  color:var(--muted);
+  font-size:1em;
+  line-height:1.6;
+  font-weight:400;
+  max-width:600px;
+  margin:0 auto;
+}
+.hero-sub strong{color:var(--gold);}
+
+.btn-primary{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:3.125rem;
+  line-height:3.125rem;
+  padding:0 1.5625rem;
+  font-family:'Poppins',sans-serif;
+  font-size:1.1em;
+  font-weight:700;
+  border-radius:1.125rem;
+  border:none;
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
+  background-color:var(--gold);
+  color:#071a0f;
+  transition:0.25s;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.btn-outline{
+  display:block;
+  width:100%;
+  max-width:100%;
+  height:3.125rem;
+  line-height:calc(3.125rem - 2px);
+  padding:0 1.5625rem;
+  font-family:'Poppins',sans-serif;
+  font-size:1.1em;
+  font-weight:500;
+  border-radius:1.125rem;
+  border:1px solid rgba(201,168,76,0.55);
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
+  background:rgba(10,30,15,0.3);
+  color:rgba(255,255,255,0.85);
+  transition:0.25s;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.hero-img{
+  display:block;
+  width:100%;
+  max-width:33.5rem;
+  margin:0 auto;
+  border-radius:1.125rem;
+  overflow:hidden;
+}
+.hero-img img{width:100%;vertical-align:top;display:block;}
+
+/* ===== SECTION TEXT ===== */
+.section-title{
+  text-align:left;
+  color:#fff;
+  font-family:'Unbounded',sans-serif;
+  font-size:1.875em;
+  line-height:1.25;
+  font-weight:600;
+}
+.section-title.center{text-align:center;}
+.section-body{
+  text-align:left;
+  color:var(--muted);
+  font-size:1em;
+  line-height:1.5;
+}
+.section-body strong{color:var(--gold);}
+
+.price-label{
+  text-align:left;
+  color:var(--gold);
+  font-family:'Unbounded',sans-serif;
+  font-size:1.5em;
+  font-weight:700;
+  letter-spacing:-0.15rem;
+}
+
+/* ===== PACKAGE CARD ===== */
+.package-card{
+  background:linear-gradient(145deg,#0d2414,#0a1e0d);
+  border-radius:1.625rem;
+  padding:2.125rem 2rem;
+  margin:0 auto;
+  max-width:75rem;
+  border:1px solid var(--border);
+}
+.package-list li{
+  display:flex;
+  align-items:flex-start;
+  gap:0.625rem;
+  margin-top:1rem;
+  color:rgba(255,255,255,0.8);
+  font-size:1em;
+  line-height:1.375;
+  font-weight:400;
+}
+.package-list li::before{
+  content:'';
+  display:inline-block;
+  width:10px;height:10px;
+  min-width:10px;
+  border-radius:50%;
+  background:var(--gold);
+  margin-top:5px;
+  flex-shrink:0;
+}
+.package-list li strong{color:#fff;}
+
+.btn-sm{
+  display:inline-block;
+  min-width:6.75rem;
+  height:3rem;
+  line-height:3rem;
+  padding:0 1.25rem;
+  font-family:'Poppins',sans-serif;
+  font-size:1em;
+  font-weight:700;
+  border-radius:1rem;
+  border:none;
+  cursor:pointer;
+  text-align:center;
+  text-decoration:none;
+  background-color:var(--gold-light);
+  color:#071a0f;
+  transition:0.25s;
+}
+
+/* ===== STEP CARDS ===== */
+.step-card{
+  background:#0a1e0d;
+  border-radius:1.125rem;
+  padding:2.125rem 2rem;
+  margin-bottom:2rem;
+  max-width:75rem;
+  margin-left:auto;
+  margin-right:auto;
+  border:1px solid var(--border);
+}
+.step-card:last-of-type{margin-bottom:0;}
+.badge-num{
+  text-align:left;color:var(--gold);
+  font-family:'Unbounded',sans-serif;
+  font-size:1.5em;font-weight:700;letter-spacing:-0.15rem;
+}
+.badge-title{
+  text-align:left;color:#fff;
+  font-family:'Poppins',sans-serif;
+  font-size:1.25em;font-weight:600;
+}
+.badge-body{
+  text-align:left;color:var(--muted);
+  font-size:1.125em;line-height:1.375;
+}
+
+/* ===== VIDEO ===== */
+.video-wrap{text-align:center;max-width:46.375rem;margin:0 auto;}
+.video-wrap > .frame{
+  border-radius:1rem;overflow:hidden;width:100%;
+  aspect-ratio:0.5625;background:#000;display:block;position:relative;
+}
+.video-wrap > .frame video{
+  width:100%;height:100%;position:absolute;top:0;left:0;border:none;object-fit:cover;
+}
+
+/* ===== FEATURE IMAGES ===== */
+.feat-img{display:block;width:100%;max-width:33.5rem;margin:0 auto;border-radius:1.125rem;overflow:hidden;}
+.feat-img img{width:100%;vertical-align:top;display:block;}
+
+/* ===== AI CHATBOX ===== */
+#nextelAiBox,#nextelAiBox *{font-family:'Poppins',-apple-system,BlinkMacSystemFont,sans-serif!important;}
+#nextelAiBox{
+  max-width:500px;margin:auto;
+  background:#0a1e0d;color:white;
+  border-radius:20px;padding:20px;overflow:hidden;
+  border:1px solid var(--border);
+}
+.ai-header{font-size:22px;font-weight:600;margin-bottom:15px;text-align:left;}
+.suggestions{display:flex;overflow-x:auto;gap:10px;padding-bottom:10px;}
+.suggestions::-webkit-scrollbar{display:none;}
+.suggestion-btn{
+  background:#132c1a;border:1px solid var(--border);padding:10px 15px;
+  border-radius:999px;color:white;cursor:pointer;white-space:nowrap;transition:0.3s;
+}
+.suggestion-btn:hover{background:#1a3d22;}
+.answer-box{margin-top:15px;padding-top:10px;min-height:0;overflow:hidden;transition:0.4s ease;}
+.answer-text{opacity:0;line-height:1.6;text-align:left;width:100%;transition:0.4s ease;}
+.ai-input-area{
+  margin-top:15px;display:flex;align-items:center;
+  background:#132c1a;border-radius:999px;padding:10px;
+  border:1px solid var(--border);
+}
+.ai-input-area input{flex:1;background:transparent;border:none;color:white;outline:none;font-size:16px;}
+.ai-icon{margin:0 8px;cursor:pointer;font-size:18px;}
+
+/* ===== SLIDESHOW ===== */
+#nextelSlider{width:100%;overflow:hidden;margin:20px 0;}
+#nextelTrack{display:flex;gap:14px;will-change:transform;}
+#nextelTrack img{width:180px;aspect-ratio:9/16;object-fit:cover;border-radius:18px;flex-shrink:0;}
+@media(max-width:500px){#nextelTrack img{width:140px;}}
+
+/* ===== CTA BOX ===== */
+.cta-box{
+  background:linear-gradient(145deg,#1e3a12 0%,#0a1e0d 60%,#2e4a1a 100%);
+  padding:4.875rem 1.375rem;text-align:center;width:100%;
+}
+.cta-title{
+  text-align:center;color:#fff;font-family:'Unbounded',sans-serif;
+  font-size:1.875em;line-height:1.25;font-weight:700;
+}
+.cta-body{text-align:center;color:var(--muted);font-size:1.125em;line-height:1.5;}
+
+.proof-note{text-align:center;color:var(--muted);font-size:0.5em;line-height:1.5;}
+
+/* ===== FOOTER ===== */
+.footer-brand{
+  text-align:left;color:#fff;font-family:'Unbounded',sans-serif;
+  font-size:1.875em;line-height:1.375;font-weight:400;
+}
+.footer-brand span{color:var(--gold);}
+.footer-sub{text-align:left;color:var(--muted);font-size:1em;line-height:1.5;}
+.footer-note{text-align:center;color:#fff;font-size:0.875em;line-height:1.5;}
+.footer-note a{color:var(--gold);text-decoration:none;}
+
+/* ===== POPUP ===== */
+.popup-wrap{
+  position:fixed;bottom:20px;left:0;width:100%;
+  display:flex;justify-content:center;z-index:9999;
+  pointer-events:none;font-family:'Poppins',sans-serif;
+}
+.popup-card{
+  background:#0a1e0d;width:94%;max-width:520px;
+  padding:14px;border-radius:10px;display:flex;
+  align-items:center;gap:12px;position:relative;
+  box-shadow:0 10px 25px rgba(0,0,0,0.3);
+  opacity:0;transform:translateY(-10px);
+  transition:opacity .4s ease,transform .4s ease;
+  pointer-events:auto;border:1px solid var(--border);
+}
+.popup-card.show{opacity:1;transform:translateY(0);}
+.active-pill{
+  position:absolute;top:-10px;left:12px;
+  background:#E63946;color:#fff;font-size:11px;
+  padding:3px 10px;border-radius:999px;font-weight:500;
+}
+.popup-avatar{
+  width:48px;height:48px;border-radius:50%;
+  border:3px solid var(--gold);background:#eee;
+  flex-shrink:0;overflow:hidden;
+}
+.popup-avatar img{width:100%;height:100%;object-fit:cover;}
+.popup-text{flex:1;display:flex;flex-direction:column;align-items:flex-start;text-align:left;}
+.popup-name{font-size:14px;font-weight:600;color:var(--gold);line-height:1.2;}
+.popup-msg{font-size:13px;font-weight:400;color:#fff;margin-top:2px;}
+.popup-join{
+  background:var(--gold);color:#071a0f;font-size:13px;
+  padding:6px 14px;border-radius:999px;font-weight:600;white-space:nowrap;
+}
+
+/* ===== AI FLOATING BTN ===== */
+#aiFloatingBtn{
+  position:fixed;right:15px;bottom:90px;
+  background:var(--gold);color:#071a0f;
+  padding:12px 16px;border-radius:14px;
+  font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;
+  cursor:pointer;z-index:9999;
+  box-shadow:0 5px 20px rgba(0,0,0,0.3);transition:0.3s;
+}
+#aiFloatingBtn:hover{transform:translateY(-2px);}
+#aiClose{
+  position:absolute;top:-8px;right:-8px;
+  background:#0a1e0d;width:20px;height:20px;
+  border-radius:50%;font-size:14px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;border:1px solid var(--border);
+}
+
+@media(max-width:736px){
+  .site-main>.inner{padding:0 0.875rem;}
+  .full{margin-left:-0.875rem;max-width:calc(100% + 1.75rem + 0.4725px);width:calc(100% + 1.75rem + 0.4725px);}
+  html{font-size:11pt;}
+}
+@media(max-width:480px){.hero-headline{font-size:1.3rem;}}
+</style>
+</head>
+<body>
+<div class="site-wrapper">
+<div class="site-main" role="main">
+<div class="inner">
+
+<!-- FIXED HEADER -->
+<div id="fixedHeaderWrapper">
+  <div class="nextel-header">
+    <div class="nextel-left">
+      <img src="https://res.cloudinary.com/mld4edlq/image/upload/nextel/logo.png" class="nextel-logo-img" alt="Nextel">
+      <div class="nextel-logo-text">Nextel</div>
+    </div>
+    <div class="nextel-menu" id="openMenu">&#9776;</div>
+  </div>
+  <div class="nextel-overlay" id="overlay"></div>
+  <div class="nextel-side" id="sideMenu">
+    <div class="nextel-close" id="closeMenu">&times;</div>
+    <div class="nextel-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="#howItWorks">How It Works</a>
+      <a href="#getStarted">Get Started</a>
+      <a href="#features">Earn Income</a>
+      <a href="#package">Starter Package</a>
+    </div>
+  </div>
+</div>
+<script>
+const openMenu=document.getElementById("openMenu");
+const closeMenu=document.getElementById("closeMenu");
+const sideMenu=document.getElementById("sideMenu");
+const overlay=document.getElementById("overlay");
+openMenu.onclick=()=>{sideMenu.classList.add("active");overlay.style.display="block";};
+closeMenu.onclick=closeAll;overlay.onclick=closeAll;
+function closeAll(){sideMenu.classList.remove("active");overlay.style.display="none";}
+</script>
+
+<div class="header-pad"></div>
+<div class="sp-30"></div>
+<div class="sp-30"></div>
+
+<!-- HERO -->
+<h1 class="hero-headline">Every Call You Make<br><span>Earns You Money</span></h1>
+<div class="sp-18"></div>
+<p class="hero-sub">Nextel Connect is Nigeria's first telecom earning platform — where your airtime, calls, and data usage generate real cash income. <strong>Your phone is now your business.</strong></p>
+<div class="sp-24"></div>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+  <li><a href="dashboard.html" class="btn-primary">Create an Account</a></li>
+  <li><a href="#howItWorks" class="btn-outline">See How It Works</a></li>
+</ul>
+<div class="sp-24"></div>
+
+<div class="hero-img">
+  <img src="https://res.cloudinary.com/mld4edlq/image/upload/nextel/img1.jpg" alt="Nextel Connect - Earn From Calls" />
+</div>
+<div class="sp-6"></div>
+
+<hr class="full screen" style="height:1px;border:none;background:rgba(201,168,76,0.15);display:block;">
+
+<!-- VERIFIED -->
+<div class="sp-30"></div>
+<h2 class="section-title">Nextel is Licensed &amp; Verified!</h2>
+<div class="sp-18"></div>
+<p class="section-body"><strong>NCC CERTIFIED TELECOM OPERATOR</strong><br><br>Nextel Connect is fully registered with the Nigerian Communications Commission (NCC) and licensed to operate as a value-added telecom service provider. Your earnings are real, traceable, and withdrawable to your Nigerian bank account.</p>
+<div class="sp-30"></div>
+
+<div class="feat-img">
+  <img src="https://res.cloudinary.com/mld4edlq/image/upload/nextel/img2.jpg" alt="Nextel NCC Verified" />
+</div>
+<div class="sp-30"></div>
+
+<h2 class="section-title">CAC Registered</h2>
+<div class="sp-18"></div>
+<p class="section-body"><strong>CORPORATE AFFAIRS COMMISSION CERTIFIED</strong><br><br>Nextel Connect Ltd is registered with Nigeria's Corporate Affairs Commission. We are a legitimate business entity authorized to reward users for telecom activity across Nigeria.</p>
+<div class="sp-30"></div>
+
+<hr class="full screen" style="height:1px;border:none;background:rgba(201,168,76,0.15);display:block;">
+
+<!-- HOW EARNINGS WORK -->
+<div class="sp-30"></div>
+<div id="howItWorks" style="display:block;height:0;"></div>
+<h2 class="section-title">How Earnings Work on Nextel</h2>
+<div class="sp-18"></div>
+
+<div class="video-wrap">
+  <div class="frame">
+    <video title="Nextel Connect - How It Works" src="https://res.cloudinary.com/mld4edlq/video/upload/nextel/hero.mp4" preload="auto" playsinline webkit-playsinline autoplay muted loop controls></video>
+  </div>
+</div>
+<div class="sp-24"></div>
+
+<ul class="package-list" style="list-style:none;padding:0;">
+  <li><p><strong>Starter Package:</strong> ₦10,000 one-time onboarding fee activates your NTU (Network Traffic Unit) earning account.</p></li>
+  <li><p><strong>Call Earnings (NTU):</strong> Every call you make generates Network Traffic Units — converted to naira daily. Earn while using your phone normally.</p></li>
+  <li><p><strong>Data Usage Bonus:</strong> Your internet data usage earns passive income. The more you browse, the more you earn.</p></li>
+  <li><p><strong>Referral Multiplier:</strong> Invite others to join Nextel and earn a commission on their activity — no cap on referrals.</p></li>
+  <li><p><strong>Daily Incentives:</strong> Receive daily cash bonuses credited to your Nextel wallet, redeemable to any Nigerian bank account.</p></li>
+  <li><p><strong>Task Earnings:</strong> Complete simple in-app tasks (surveys, network tests, sponsored activities) and earn extra on top of your call income.</p></li>
+</ul>
+<div class="sp-30"></div>
+
+<hr class="full screen" style="height:1px;border:none;background:rgba(201,168,76,0.15);display:block;">
+
+<!-- FEATURES -->
+<div class="sp-30"></div>
+<div id="features" style="display:block;height:0;"></div>
+
+<div class="feat-img">
+  <img src="https://res.cloudinary.com/mld4edlq/image/upload/nextel/img3.jpg" alt="Earn from calls" />
+</div>
+<div class="sp-24"></div>
+<h2 class="section-title">Your Calls Are Worth Money</h2>
+<div class="sp-18"></div>
+<p class="section-body">Every phone call you make — to family, friends, business partners — now generates Network Traffic Units (NTU) that convert to naira in real time. The more you call, the more you earn. You do not need to change your lifestyle, just continue using your phone as normal.</p>
+<div class="sp-30"></div>
+
+<div class="feat-img">
+  <img src="https://res.cloudinary.com/mld4edlq/image/upload/nextel/img4.jpg" alt="Data earns income" />
+</div>
+<div class="sp-24"></div>
+<h2 class="section-title">Even Your Data Bundle Pays You</h2>
+<div class="sp-18"></div>
+<p class="section-body"><em>Just like you browse Instagram, WhatsApp, or Twitter every day — do the same on Nextel and watch your data usage convert to earnings.</em><br><br>Your browsing, streaming, and downloading activity all contribute to your monthly NTU balance. Data has never been this rewarding in Nigeria.</p>
+<div class="sp-30"></div>
+
+<div class="feat-img">
+  <img src="https://res.cloudinary.com/mld4edlq/image/upload/nextel/img5.jpg" alt="Referral earnings" />
+</div>
+<div class="sp-24"></div>
+<h2 class="section-title">Share Your Referral Link &#128640;</h2>
+<div class="sp-18"></div>
+<p class="section-body">Share your unique referral link with anyone in Nigeria. When they join Nextel and activate, you earn a referral bonus — plus a percentage of their NTU earnings every month. Build your network, multiply your income.</p>
+<div class="sp-30"></div>
+
+<hr class="full screen" style="height:1px;border:none;background:rgba(201,168,76,0.15);display:block;">
+
+<!-- PACKAGE CARD -->
+<div class="sp-60"></div>
+<div id="getStarted" style="display:block;height:0;"></div>
+<h1 class="section-title center">Nextel Unique User Experience</h1>
+<p style="text-align:center;color:var(--muted);font-size:1.125em;line-height:1.375;margin-top:0.875rem;">How each income stream on Nextel works for you</p>
+<div class="sp-24"></div>
+
+<div class="package-card" id="package">
+  <p class="price-label">Nextel</p>
+  <p style="font-family:'Poppins';font-size:1.625em;font-weight:700;color:#fff;margin-top:0.5rem;">&#8358;10,000</p>
+  <div class="sp-12"></div>
+  <ul class="package-list" style="list-style:none;padding:0;">
+    <li><p><strong>Instant Activation Bonus:</strong> Your account is credited ₦10,000 immediately after activation.</p></li>
+    <li><p><strong>NTU Call Earnings:</strong> Earn from every call you make — activity converts to naira daily.</p></li>
+    <li><p><strong>Data Passive Income:</strong> Your internet data usage earns passive NTU income around the clock.</p></li>
+    <li><p><strong>Referral Commission:</strong> Earn ₦2,000 for every person you refer who activates their account.</p></li>
+    <li><p><strong>Daily Task Bonuses:</strong> Complete daily tasks and earn extra cash on top of call income.</p></li>
+    <li><p><strong>Free SIM Benefit:</strong> Registered users get a Nextel NTU SIM card for maximized earning potential.</p></li>
+  </ul>
+  <div class="sp-24"></div>
+  <a href="dashboard.html" class="btn-sm">Create an Account</a>
+</div>
+<div class="sp-60"></div>
+
+<!-- GET STARTED STEPS -->
+<h2 class="section-title center">Get Started in 3 Simple Steps</h2>
+<div class="sp-24"></div>
+
+<div class="step-card">
+  <p class="badge-num">1</p>
+  <div class="sp-12"></div>
+  <p class="badge-title">Sign Up</p>
+  <div class="sp-12"></div>
+  <p class="badge-body">Enter your name, email, phone number and create a secure password. We'll create your personalized Nextel earning profile instantly.</p>
+</div>
+
+<div class="step-card">
+  <p class="badge-num">2</p>
+  <div class="sp-12"></div>
+  <p class="badge-title">Confirm Starter Package</p>
+  <div class="sp-12"></div>
+  <p class="badge-body">Activate your account with the one-time ₦10,000 Starter Package fee. This unlocks your NTU earning account, your activation bonus, and all income streams.</p>
+</div>
+
+<div class="step-card">
+  <p class="badge-num">3</p>
+  <div class="sp-12"></div>
+  <p class="badge-title">Start Earning</p>
+  <div class="sp-12"></div>
+  <p class="badge-body">Use your phone as normal — make calls, browse data, refer friends. Your earnings accumulate daily and you can withdraw to any Nigerian bank account.</p>
+</div>
+
+<div class="sp-30"></div>
+<hr class="full screen" style="height:1px;border:none;background:rgba(201,168,76,0.15);display:block;">
+
+<!-- SLIDESHOW -->
+<div class="sp-30"></div>
+<h2 class="section-title center">Everyone Can Earn With Nextel</h2>
+<p style="text-align:center;color:var(--muted);font-size:1em;line-height:1.375;margin-top:0.875rem;">Your phone activity has value. Time to get paid for it.</p>
+<div class="sp-18"></div>
+
+<div id="nextelSlider">
+  <div id="nextelTrack">
+    <img src="https://i.postimg.cc/x8RXbXFc/IMG-20260413-091738-821.jpg" alt="">
+    <img src="https://i.postimg.cc/3RqSQwZD/IMG-20260413-091740-201.jpg" alt="">
+    <img src="https://i.postimg.cc/2jsY4jNJ/IMG-20260413-091742-308.jpg" alt="">
+    <img src="https://i.postimg.cc/FHZQ5jk7/IMG-20260413-091743-380.jpg" alt="">
+    <img src="https://i.postimg.cc/V62xBg2P/IMG-20260413-091745-513.jpg" alt="">
+    <img src="https://i.postimg.cc/8C09NwpJ/IMG-20260413-091751-088.jpg" alt="">
+    <img src="https://i.postimg.cc/hGfZyx9M/IMG-20260413-091752-689.jpg" alt="">
+    <img src="https://i.postimg.cc/x8RXbXFc/IMG-20260413-091738-821.jpg" alt="">
+    <img src="https://i.postimg.cc/xjKx49zD/IMG-20260413-091757-421.jpg" alt="">
+  </div>
+</div>
+<script>
+let sx=0,sspeed=0.3;
+const strack=document.getElementById("nextelTrack");
+function sslide(){
+  sx-=sspeed;
+  strack.style.transform=`translateX(${sx}px)`;
+  const first=strack.children[0];
+  const w=first.offsetWidth+14;
+  if(Math.abs(sx)>=w){strack.appendChild(first);sx+=w;}
+  requestAnimationFrame(sslide);
+}
+sslide();
+let stimer;
+window.addEventListener("scroll",()=>{sspeed=1.2;clearTimeout(stimer);stimer=setTimeout(()=>{sspeed=0.3;},150);});
+</script>
+
+<p class="proof-note" style="margin-top:1rem;">Earnings vary based on call volume, data usage, and referral activity. Individual results will differ.</p>
+<div class="sp-24"></div>
+
+<ul style="list-style:none;padding:0;margin:0;">
+  <li><a href="dashboard.html" class="btn-primary">Create an Account</a></li>
+</ul>
+<div class="sp-30"></div>
+
+<hr class="full screen" style="height:1px;border:none;background:rgba(201,168,76,0.15);display:block;">
+
+<!-- CTA -->
+<div class="sp-30"></div>
+<div class="cta-box full screen" style="position:relative;left:50%;margin-left:-50vw;width:100vw;">
+  <div style="max-width:90rem;margin:0 auto;padding:0 1.25rem;">
+    <h2 class="cta-title">Ready to Earn From Your First Call Today?</h2>
+    <div class="sp-18"></div>
+    <p class="cta-body">Join thousands of Nigerians who are earning real money from phone calls and data usage on Nextel. Takes 2 minutes to register. Earnings start immediately after activation.</p>
+    <div class="sp-30"></div>
+    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.75rem;">
+      <li><a href="dashboard.html" class="btn-primary">Start Earning Now</a></li>
+      <li><a href="dashboard.html" class="btn-outline">Create an Account</a></li>
+    </ul>
+  </div>
+</div>
+<div class="sp-30"></div>
+
+<hr class="full screen" style="height:1px;border:none;background:rgba(201,168,76,0.15);display:block;">
+
+<!-- AI FAQ -->
+<div class="sp-30"></div>
+<h2 class="section-title center">Got Questions? Ask NexAI</h2>
+<div class="sp-18"></div>
+
+<div id="nextelAiBox">
+  <div class="ai-header">Hi there, what's your question?</div>
+  <div class="suggestions" id="nextelSuggestions"></div>
+  <div class="answer-box" id="nextelAnswerBox">
+    <div class="answer-text" id="nextelAnswerText"></div>
+  </div>
+  <div class="ai-input-area">
+    <div class="ai-icon">+</div>
+    <input type="text" id="nextelUserInput" placeholder="Type your question here...">
+    <div class="ai-icon">&#127908;</div>
+  </div>
+</div>
+
+<script>
+const nFaqs=[
+  {q:"Is Nextel Legit?",a:"Yes, Nextel Connect is a fully licensed and CAC-registered telecom earning platform in Nigeria."},
+  {q:"Can I withdraw?",a:"Yes, withdrawals are processed to any Nigerian bank account. Withdrawals are available once your account is activated."},
+  {q:"How much can I earn daily?",a:"Your daily earnings depend on your call volume, data usage, and referral activity. Active users earn between ₦5,000–₦30,000 daily."},
+  {q:"Do I need referrals?",a:"No, referrals are optional. You earn from calls and data alone. Referrals are just an additional income stream."},
+  {q:"How much is the package?",a:"The one-time Starter Package fee is ₦10,000. This unlocks your NTU earning account and all income streams."},
+  {q:"Are there hidden fees?",a:"No hidden charges. The ₦10,000 Starter Package is the only payment required. Everything is transparent."},
+  {q:"Withdrawal timeline?",a:"Withdrawals are processed within 24 hours. There is no minimum withdrawal threshold."},
+  {q:"What is NTU?",a:"NTU stands for Network Traffic Unit — Nextel's proprietary earning metric. Every call and data activity generates NTUs that convert to naira."},
+  {q:"Which banks are supported?",a:"All Nigerian bank accounts are supported including Access Bank, GTBank, Opay, PalmPay, Kuda, Moniepoint and more."}
+];
+const nContainer=document.getElementById("nextelSuggestions");
+nFaqs.forEach(item=>{
+  const btn=document.createElement("button");
+  btn.className="suggestion-btn";
+  btn.innerText=item.q;
+  btn.onclick=()=>showNAnswer(item.a);
+  nContainer.appendChild(btn);
+});
+function showNAnswer(text){
+  const box=document.getElementById("nextelAnswerBox");
+  const answer=document.getElementById("nextelAnswerText");
+  box.style.minHeight="80px";
+  answer.innerHTML="";answer.style.opacity="1";
+  let i=0;
+  function type(){if(i<text.length){answer.innerHTML+=text.charAt(i);i++;setTimeout(type,15);}}
+  type();
+}
+document.getElementById("nextelUserInput").addEventListener("keydown",function(e){
+  if(e.key==="Enter"){
+    let input=this.value.toLowerCase();
+    let found=nFaqs.find(item=>{
+      let words=item.q.toLowerCase().split(" ");
+      return words.filter(w=>input.includes(w)).length>=2;
+    });
+    if(found){showNAnswer(found.a);}
+    else{showNAnswer("Sorry, I didn't catch that. Try selecting a question above or contact us on WhatsApp.");}
+    this.value="";
+  }
+});
+</script>
+
+<div class="sp-30"></div>
+
+<hr class="full screen" style="height:1px;border:none;background:rgba(201,168,76,0.15);display:block;">
+
+<!-- FOOTER -->
+<div class="sp-30"></div>
+<p class="footer-brand"><span>N</span>extel</p>
+<div class="sp-18"></div>
+<p class="footer-sub">Nextel Connect is an innovative telecom ecosystem connecting Nigerians to real cash income through phone calls, data usage, and referrals. Your network is your net worth.</p>
+<div class="sp-18"></div>
+<hr class="divider gold-line">
+<div class="sp-18"></div>
+<p class="footer-note">Built by <a href="#">Nextel Connect Ltd</a></p>
+<div class="sp-30"></div>
+
+<!-- POPUP NOTIFICATIONS -->
+<div class="popup-wrap">
+  <div id="nextelPopup" class="popup-card">
+    <div class="active-pill">Active</div>
+    <div class="popup-avatar"><img id="nextelPopupImg" src="#" alt=""></div>
+    <div class="popup-text">
+      <div id="nextelPopupName" class="popup-name"></div>
+      <div id="nextelPopupMsg" class="popup-msg"></div>
+    </div>
+    <div class="popup-join">Join</div>
+  </div>
+</div>
+<script>
+const nPopups=[
+  {img:"https://i.postimg.cc/1tG2tHQ5/IMG-2370.jpg",name:"Bolu Adeniyi",msg:"Just earned ₦3,000 from call activity"},
+  {img:"https://i.postimg.cc/4x0rFyPf/IMG-2376.jpg",name:"Esther Katherine",msg:"Just made a withdrawal of ₦127,500"},
+  {img:"https://i.postimg.cc/d0mjZShF/IMG-2374.jpg",name:"Aisha Bello",msg:"Just earned ₦78,000 from data usage"},
+  {img:"https://i.postimg.cc/5NSz3Fxr/IMG-2563.jpg",name:"Chinedu Obi",msg:"Earned ₦20,000 from 3 referrals"},
+  {img:"https://i.postimg.cc/mrzh0csW/IMG-2372.jpg",name:"Sola Martins",msg:"Just made a withdrawal of ₦215,000"},
+  {img:"https://i.postimg.cc/NFpgyYcr/IMG-2371.jpg",name:"Kelvin Johnson",msg:"Earned ₦67,400 from NTU call income"},
+  {img:"https://i.postimg.cc/XNDmvpMZ/IMG-2375.jpg",name:"Ruth Williams",msg:"Just made a withdrawal of ₦300,000"},
+  {img:"https://i.postimg.cc/9QxJLkWZ/IMG-2577.jpg",name:"Yemi Ade",msg:"Just withdrew ₦97,600 to her account"},
+  {img:"https://i.postimg.cc/bvCW2JDX/IMG-2373.jpg",name:"Daniel Okoye",msg:"Just made a withdrawal of ₦290,000"},
+  {img:"https://i.postimg.cc/1tG2tHQ5/IMG-2370.jpg",name:"Fatima Lawal",msg:"Earned ₦27,000 from referral bonuses"}
+];
+let npIdx=0;
+const npCard=document.getElementById("nextelPopup");
+const npImg=document.getElementById("nextelPopupImg");
+const npName=document.getElementById("nextelPopupName");
+const npMsg=document.getElementById("nextelPopupMsg");
+function showNPopup(){
+  const d=nPopups[npIdx];
+  npImg.src=d.img;npName.textContent=d.name;npMsg.textContent=d.msg;
+  npCard.classList.add("show");
+  setTimeout(()=>{npCard.classList.remove("show");},3500);
+  npIdx=(npIdx+1)%nPopups.length;
+}
+setTimeout(()=>{showNPopup();setInterval(showNPopup,5000);},5000);
+</script>
+
+<!-- AI FLOATING BUTTON -->
+<div id="aiFloatingBtn">Ask AI<div id="aiClose">&times;</div></div>
+<script>
+document.getElementById("aiFloatingBtn").onclick=function(e){
+  if(e.target.id!=="aiClose"){
+    const t=document.getElementById("nextelAiBox");
+    if(t){t.scrollIntoView({behavior:"smooth",block:"start"});}
+  }
+};
+document.getElementById("aiClose").onclick=function(e){
+  e.stopPropagation();
+  document.getElementById("aiFloatingBtn").style.display="none";
+};
+</script>
+
+</div>
+</div>
+</div>
+</body>
+</html>

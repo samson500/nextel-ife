@@ -1,0 +1,605 @@
+<!DOCTYPE HTML><html lang="en">
+<head>
+<title>Nextel Connect - Secure Activation Portal</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="light only" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background:#050a07;
+  font-family:'Poppins',sans-serif;
+  color:#fff;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+:root{
+  --gold:#C9A84C;
+  --gold2:#D4A843;
+  --green:#1a7a4a;
+  --bg:#050a07;
+  --card:#0e1a11;
+  --card2:#111d14;
+  --border:rgba(201,168,76,0.2);
+  --muted:rgba(255,255,255,0.55);
+}
+
+/* ========================= MAIN PAYMENT PAGE ========================= */
+#payPage{
+  min-height:100vh;
+  padding:40px 20px 60px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* SECURITY BADGE */
+.security-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:transparent;
+  border:1.5px solid var(--border);
+  border-radius:999px;
+  padding:10px 20px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--gold);
+  margin-bottom:32px;
+}
+.security-badge svg{width:16px;height:16px;fill:var(--gold);}
+
+/* TITLE */
+.pay-title{
+  font-size:clamp(1.6rem,6vw,2.2rem);
+  font-weight:800;
+  text-align:center;
+  color:#fff;
+  line-height:1.2;
+  margin-bottom:10px;
+}
+.pay-sub{
+  font-size:14px;
+  color:var(--gold);
+  text-align:center;
+  font-weight:500;
+  margin-bottom:32px;
+}
+
+/* SECURITY NOTE */
+.security-note{
+  width:100%;
+  max-width:480px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px 20px;
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.6;
+  margin-bottom:20px;
+  text-align:left;
+}
+
+/* PAYMENT OPTION CARD */
+.pay-option{
+  width:100%;
+  max-width:480px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px 20px;
+  margin-bottom:20px;
+  text-align:left;
+}
+.option-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:14px;
+}
+.option-icon{font-size:22px;}
+.option-title{font-size:17px;font-weight:700;color:#fff;}
+.option-badge{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:4px 12px;
+  font-size:11px;
+  font-weight:600;
+  color:var(--gold);
+  margin-left:auto;
+  white-space:nowrap;
+}
+.option-desc{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.6;
+  margin-bottom:16px;
+}
+.option-fee{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:20px;
+  line-height:1.5;
+}
+.option-fee strong{color:#fff;}
+
+/* PAY BUTTON */
+.pay-btn{
+  width:100%;
+  height:58px;
+  border:none;
+  border-radius:16px;
+  background:var(--gold);
+  color:#050a07;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  transition:0.2s;
+}
+.pay-btn:active{transform:scale(0.98);}
+.pay-btn svg{width:20px;height:20px;fill:#050a07;}
+
+/* DIVIDER */
+.or-divider{
+  width:100%;
+  max-width:480px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:20px;
+  color:var(--muted);
+  font-size:13px;
+}
+.or-divider::before,.or-divider::after{
+  content:'';flex:1;
+  height:1px;background:var(--border);
+}
+
+/* FOOTER NOTE */
+.pay-footer{
+  text-align:center;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:16px;
+  line-height:1.6;
+  max-width:400px;
+}
+.pay-footer a{color:var(--gold);text-decoration:none;}
+
+/* ========================= BANK TRANSFER MODAL ========================= */
+#bankModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(10px);
+  z-index:9999;
+  align-items:flex-end;
+  justify-content:center;
+  padding:0;
+}
+#bankModal.show{display:flex;}
+
+.modal-sheet{
+  width:100%;
+  max-width:520px;
+  background:#0e1a11;
+  border-radius:28px 28px 0 0;
+  padding:24px 20px 40px;
+  border:1px solid var(--border);
+  border-bottom:none;
+  animation:slideUp 0.3s ease;
+  max-height:92vh;
+  overflow-y:auto;
+}
+@keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+
+.modal-drag{
+  width:40px;height:4px;
+  background:rgba(255,255,255,0.15);
+  border-radius:999px;
+  margin:0 auto 20px;
+}
+.modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+.modal-title{font-size:18px;font-weight:700;display:flex;align-items:center;gap:10px;}
+.modal-title span{font-size:20px;}
+.modal-close{
+  width:36px;height:36px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.08);
+  border:none;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* COUNTDOWN */
+.countdown-box{
+  background:#0a1410;
+  border:1px solid rgba(201,168,76,0.25);
+  border-radius:14px;
+  padding:14px 16px;
+  text-align:center;
+  margin-bottom:16px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--gold);
+}
+
+/* DETAIL CARDS */
+.detail-card{
+  background:#0a1410;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:12px;
+}
+.detail-label{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:6px;
+  font-weight:500;
+  letter-spacing:0.3px;
+}
+.detail-value{
+  font-size:16px;
+  font-weight:700;
+  color:#fff;
+}
+.detail-value.gold{color:var(--gold);font-size:20px;}
+
+.detail-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.copy-btn{
+  background:var(--gold);
+  color:#050a07;
+  border:none;
+  border-radius:10px;
+  padding:8px 18px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:'Poppins',sans-serif;
+  white-space:nowrap;
+  flex-shrink:0;
+  transition:0.2s;
+}
+.copy-btn:active{transform:scale(0.96);}
+.copy-btn.copied{background:#25a060;color:#fff;}
+
+/* CONTACT BUTTONS */
+.contact-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:20px;
+}
+.contact-btn{
+  height:52px;
+  border:none;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:'Poppins',sans-serif;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:0.2s;
+}
+.contact-btn:active{transform:scale(0.97);}
+.contact-btn.whatsapp{background:#25D366;color:#fff;}
+.contact-btn.telegram{background:#229ED9;color:#fff;}
+.contact-btn svg{width:20px;height:20px;fill:#fff;}
+
+/* DONE NOTE */
+.done-note{
+  margin-top:16px;
+  padding:14px 16px;
+  background:rgba(37,160,96,0.1);
+  border:1px solid rgba(37,160,96,0.25);
+  border-radius:14px;
+  font-size:13px;
+  color:rgba(255,255,255,0.75);
+  line-height:1.6;
+  text-align:center;
+}
+.done-note strong{color:#25a060;}
+
+/* CONFIRMED SCREEN */
+#confirmedScreen{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:var(--bg);
+  z-index:99999;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:40px 24px;
+  text-align:center;
+}
+#confirmedScreen.show{display:flex;}
+.confirmed-icon{
+  width:90px;height:90px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:24px;
+  animation:popIn 0.4s ease;
+}
+@keyframes popIn{from{transform:scale(0.5);opacity:0;}to{transform:scale(1);opacity:1;}}
+.confirmed-title{font-size:26px;font-weight:800;margin-bottom:10px;}
+.confirmed-sub{font-size:15px;color:var(--muted);line-height:1.6;margin-bottom:32px;max-width:340px;}
+.confirmed-btn{
+  width:100%;max-width:360px;height:56px;
+  background:var(--gold);color:#050a07;
+  border:none;border-radius:16px;
+  font-size:16px;font-weight:700;
+  cursor:pointer;font-family:'Poppins',sans-serif;
+}
+</style>
+</head>
+<body>
+
+<!-- ========================= PAYMENT PAGE ========================= -->
+<div id="payPage">
+
+  <div class="security-badge">
+    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+    Secure Activation Portal
+  </div>
+
+  <h1 class="pay-title">Activate Your Nextel Account</h1>
+  <p class="pay-sub" id="paySubTitle">Nextel Starter Package &mdash; &#8358;10,000</p>
+
+  <div class="security-note">
+    All Nextel payments are encrypted, verified, and securely processed for immediate account activation.
+  </div>
+
+  <!-- BANK TRANSFER OPTION -->
+  <div class="pay-option">
+    <div class="option-header">
+      <span class="option-icon">&#127970;</span>
+      <span class="option-title">Bank Transfer</span>
+      <span class="option-badge">Fastest Option</span>
+    </div>
+    <p class="option-desc">
+      Complete payment instantly using bank transfer or USSD and unlock your Nextel earning dashboard immediately.
+    </p>
+    <p class="option-fee" id="optionFeeText"><strong>Starter Package &bull; &#8358;10,000</strong></p>
+    <button class="pay-btn" onclick="openBankModal()">
+      <svg viewBox="0 0 24 24"><path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3zM12 1L2 6v2h20V6z"/></svg>
+      Continue to Secure Payment
+    </button>
+  </div>
+
+  <p class="pay-footer">
+    By completing this payment, you agree to Nextel's
+    <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+    Your account will be activated within minutes of payment confirmation.
+  </p>
+
+</div>
+
+<!-- ========================= BANK TRANSFER MODAL ========================= -->
+<div id="bankModal">
+  <div class="modal-sheet">
+    <div class="modal-drag"></div>
+
+    <div class="modal-header">
+      <div class="modal-title"><span>&#127970;</span> Bank Transfer Details</div>
+      <button class="modal-close" onclick="closeBankModal()">&times;</button>
+    </div>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-box">
+      Payment reservation expires in <span id="countdown">10:00</span>
+    </div>
+
+    <!-- ACTIVATION FEE -->
+    <div class="detail-card">
+      <div class="detail-label">Activation Fee</div>
+      <div class="detail-value gold" id="modalPlanValue">Starter Package &bull; &#8358;10,000</div>
+    </div>
+
+
+
+    <!-- BANK NAME -->
+    <div class="detail-card">
+      <div class="detail-label">Bank Name</div>
+      <div class="detail-value">Kuda MFB</div>
+    </div>
+
+    <!-- ACCOUNT NAME -->
+    <div class="detail-card">
+      <div class="detail-label">Account Name</div>
+      <div class="detail-value">IFEOLUWA DIGITAL INNOVATIONS- NEXTEL</div>
+    </div>
+
+    <!-- ACCOUNT NUMBER -->
+    <div class="detail-card">
+      <div class="detail-row">
+        <div>
+          <div class="detail-label">Account Number</div>
+          <div class="detail-value gold" id="accountNum">3003978161</div>
+        </div>
+        <button class="copy-btn" id="copyBtn" onclick="copyAccount()">Copy</button>
+      </div>
+    </div>
+
+    <!-- DONE NOTE -->
+    <div class="done-note">
+      <strong>After payment, send your proof of transfer</strong> to our support team below and your account will be activated within <strong>5–15 minutes</strong>.
+    </div>
+
+    <!-- CONTACT BUTTONS -->
+    <div class="contact-row">
+      <button class="contact-btn whatsapp" onclick="contactWhatsApp()">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </button>
+      <button class="contact-btn telegram" onclick="contactTelegram()">
+        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        Telegram
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========================= CONFIRMED SCREEN ========================= -->
+<div id="confirmedScreen">
+  <div class="confirmed-icon">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="#071a0f"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+  </div>
+  <h2 class="confirmed-title">Payment Submitted!</h2>
+  <p class="confirmed-sub">Your payment proof has been sent. Our team will activate your Nextel account within 5–15 minutes.</p>
+  <button class="confirmed-btn" onclick="window.location.href='dashboard.html'">Go to Dashboard</button>
+</div>
+
+<script>
+
+/* ---- LOAD PLAN FROM LOCALSTORAGE ---- */
+(function(){
+  const user = JSON.parse(localStorage.getItem("nextelUser") || "{}");
+  const plan   = user.plan   || "Starter Package";
+  const amount = user.activationAmount || 10000;
+  const fmt = "₦" + Number(amount).toLocaleString("en-NG");
+
+  const subTitle = document.getElementById("paySubTitle");
+  if(subTitle) subTitle.textContent = "Nextel " + plan + " — " + fmt;
+
+  const feeText = document.getElementById("optionFeeText");
+  if(feeText) feeText.innerHTML = "<strong>" + plan + " • " + fmt + "</strong>";
+
+  const modalVal = document.getElementById("modalPlanValue");
+  if(modalVal) modalVal.textContent = plan + " • " + fmt;
+})();
+
+/* ---- BANK MODAL ---- */
+function openBankModal(){
+  document.getElementById("bankModal").classList.add("show");
+  document.body.style.overflow = "hidden";
+  startCountdown();
+}
+function closeBankModal(){
+  document.getElementById("bankModal").classList.remove("show");
+  document.body.style.overflow = "auto";
+  clearInterval(countdownTimer);
+}
+
+/* ---- COUNTDOWN ---- */
+let countdownTimer;
+function startCountdown(){
+  let secs = 10 * 60;
+  clearInterval(countdownTimer);
+  countdownTimer = setInterval(()=>{
+    secs--;
+    if(secs <= 0){ clearInterval(countdownTimer); document.getElementById("countdown").innerText = "00:00"; return; }
+    const m = Math.floor(secs/60).toString().padStart(2,"0");
+    const s = (secs%60).toString().padStart(2,"0");
+    document.getElementById("countdown").innerText = m+":"+s;
+  },1000);
+}
+
+/* ---- COPY ACCOUNT ---- */
+function copyAccount(){
+  const num = document.getElementById("accountNum").innerText;
+  navigator.clipboard.writeText(num).then(()=>{
+    const btn = document.getElementById("copyBtn");
+    btn.innerText = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(()=>{ btn.innerText="Copy"; btn.classList.remove("copied"); },2500);
+  }).catch(()=>{
+    /* fallback */
+    const ta = document.createElement("textarea");
+    ta.value = num;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+    const btn = document.getElementById("copyBtn");
+    btn.innerText = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(()=>{ btn.innerText="Copy"; btn.classList.remove("copied"); },2500);
+  });
+}
+
+/* ---- CONTACT LINKS FROM FIRESTORE ---- */
+let _waLink = "";
+let _tgLink = "";
+
+async function loadContactLinks(){
+  try {
+    const { initializeApp }  = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+    const { getFirestore, doc, getDoc } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    const app = initializeApp({
+      apiKey:            "AIzaSyDrnmtx0LkfMKytzTKQZwXCg1JKZXiJmtU",
+      authDomain:        "glamour-28049.firebaseapp.com",
+      projectId:         "glamour-28049",
+      storageBucket:     "glamour-28049.firebasestorage.app",
+      messagingSenderId: "22177815395",
+      appId:             "1:22177815395:web:2ca7caa2b1626299675156"
+    }, "nextel-pay");
+    const db   = getFirestore(app, "(default)");
+    const snap = await getDoc(doc(db, "account", "nextelife"));
+    if(snap.exists()){
+      _waLink = snap.data().whatsappLink || "";
+      _tgLink = snap.data().telegramLink || "";
+    }
+  } catch(e){ console.warn("Could not load contact links", e); }
+}
+
+loadContactLinks();
+
+function contactWhatsApp(){
+  const user   = JSON.parse(localStorage.getItem("nextelUser") || "{}");
+  const name   = user.name || "User";
+  const plan   = user.plan || "Starter Package";
+  const amount = user.activationAmount || 10000;
+  const fmt    = "₦" + Number(amount).toLocaleString("en-NG");
+  const msg    = encodeURIComponent(`Hello Nextel Support,\n\nI just made a payment of ${fmt} for the Nextel ${plan} activation.\n\nName: ${name}\n\nPlease confirm my activation. Thank you.`);
+  const base   = _waLink || "https://wa.me/2348000000000";
+  const url    = base.includes("wa.me") ? base + "?text=" + msg : base;
+  window.open(url, "_blank");
+}
+function contactTelegram(){
+  const url = _tgLink || "https://t.me/nextelconnect";
+  window.open(url, "_blank");
+}
+
+/* ---- CLOSE ON OUTSIDE CLICK ---- */
+document.getElementById("bankModal").addEventListener("click", function(e){
+  if(e.target === this) closeBankModal();
+});
+
+/* ---- REDIRECT FROM DASHBOARD ---- */
+/* If user came here from dashboard activation btn, store intent */
+window.addEventListener("load",()=>{
+  const params = new URLSearchParams(window.location.search);
+  if(params.get("ref") === "dashboard"){
+    /* auto-open bank modal if directed from dashboard */
+  }
+});
+
+</script>
+</body>
+</html>
